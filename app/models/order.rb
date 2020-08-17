@@ -4,7 +4,7 @@ class Order < ApplicationRecord
 	has_many :order_products, dependent: :destroy
 	has_many :products, through: :order_products
 
-	validates :post_code, length: {is: 7}
+	validates :post_code, length: { is: 7}
 	validates :address, presence: true,length: { maximum: 50}
 	validates :name, presence: true,length: { maximum: 30}
 

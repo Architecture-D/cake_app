@@ -1,10 +1,10 @@
 class Order < ApplicationRecord
 
     belongs_to :customer
-	has_many :ordder_products, dependent: :destroy
+	has_many :order_products, dependent: :destroy
 	has_many :products, through: :order_products
 
-	validates :post_code, length: {is: 7}, numericality: { only_integer: true}
+	validates :post_code, length: {is: 7}
 	validates :adress, presence: true,length: { maximum: 50}
 	validates :name, presence: true,length: { maximum: 30}
 

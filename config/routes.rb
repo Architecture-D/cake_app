@@ -6,7 +6,7 @@ Rails.application.routes.draw do
    devise_for :admins
   end
   devise_for :customers
-  resources :costomers,only: [:show,:index,:edit,:update,:hide,:delete]
+  resources :customers,only: [:show,:index,:edit,:update,:hide,:delete]
   resources :cart_items,only: [:create,:index,:destroy_all,:destroy,:update]
   resources :orders,only: [:new,:confirm,:create,:thank,:index,:show]
   resources :destinations,only: [:index,:create,:destroy,:edit,:update]

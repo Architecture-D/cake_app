@@ -2,7 +2,7 @@ class Product < ApplicationRecord
 
 	validates :genre_id, presence: true
 	validates :name, presence: true
-	validates :introduction, presence: true, ength:{maximum: 300}
+	validates :introduction, presence: true, length:{ maximum: 300}
 	validates :price, presence: true, numericality:{ only_integer: true}
 
 	attachment :image_id

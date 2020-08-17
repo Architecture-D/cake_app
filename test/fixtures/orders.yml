@@ -3,7 +3,7 @@
 one:
   customer_id: 1
   post_code: MyString
-  adress: MyString
+  address: MyString
   name: MyString
   shipping_code: 1
   total_payment: 1
@@ -15,7 +15,7 @@ one:
 two:
   customer_id: 1
   post_code: MyString
-  adress: MyString
+  address: MyString
   name: MyString
   shipping_code: 1
   total_payment: 1

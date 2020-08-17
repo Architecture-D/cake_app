@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
 
   
-  get 'home/top'
-  get 'home/about'
   namespace :admin do
    devise_for :admins
   end

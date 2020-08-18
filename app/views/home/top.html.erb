@@ -1,2 +1,14 @@
-<h1>Home#top</h1>
-<p>Find me in app/views/home/top.html.erb</p>
+<h3>ログイン前ヘッダー</h3>
+<%= link_to "Home", root_path %>
+<%= link_to "About", home_about_path %>
+<%= link_to "商品一覧", products_path %>
+<%= link_to "新規登録", new_customer_registration_path %>
+<%= link_to "ログイン", new_customer_session_path %>
+<h1>顧客HOME</h1>
+<p>ジャンル検索BOX</p>
+<p>ようこそ、NaganoCakeへ！<br>
+このサイトは、ケーキ販売のECサイトになります。<br>
+会員でない方も商品の閲覧はできますが、<br>
+購入には会員登録が必要になります。</p>
+<p>おすすめ商品写真BOX</p>
+<%= link_to "もっとみる", products_path %>

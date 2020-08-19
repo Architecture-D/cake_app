@@ -10,6 +10,63 @@
   </head>
 
   <body>
+<header class="navbar navbar-fixed-top">
+  <div class="container">
+    <div class='row'>
+      <div class='col-xs-offset-5'>
+        <nav class='nav navbar-nav navbar-center' >
+        <h4>Nagano Cake</h4>
+        </nav>
+      </div>
+<!-- 条件分岐で管理人、会員、顧客用のヘッダーを表示 -->
+  <% if admin_signed_in? %>
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to "商品一覧", admin_products_path,class: "Editlink" %></li>
+          <li><%= link_to "会員一覧", admin_customers_path,class: "Editlink" %></li>
+          <li><%= link_to "注文履歴一覧", admin_orders_path,class: "Editlink" %></li>
+          <li><%= link_to "ジャンル一覧", admin_genres_path,class: "Editlink" %></li>
+          <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete,class: "Editlink" %></li>
+      </ul>
+    </nav>
+
+  <% elsif customer_signed_in? %>
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to "マイページ", customers_path,class: "Editlink" %></li>
+          <li><%= link_to "商品一覧", products_path,class: "Editlink" %></li>
+          <li><%= link_to "カート", cart_items_path,class: "Editlink" %></li>
+          <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete,class: "Editlink"%></li>
+      </ul>
+    </nav>
+
+  <% else %>
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to "Home", root_path,class: "Editlink" %></li>
+          <li><%= link_to "About", home_about_path,class: "Editlink" %></li>
+          <li><%= link_to "商品一覧", products_path,class: "Editlink" %></li>
+          <li><%= link_to "新規登録", new_customer_registration_path,class: "Editlink" %></li>
+          <li><%= link_to "ログイン", new_customer_session_path,class: "Editlink" %></li>
+      </ul>
+    </nav>
+
+  <% end %>
+    </div>
+  </div>
+</header>
+
+  <div class= container>
     <%= yield %>
+  </div>
+
+<footer>
+  <a class="insta"href="https://www.instagram.com/?hl=ja"><i class="fab fa-instagram"></i></a>
+  <a href="https://twitter.com/login?lang=ja"><i class="fab fa-twitter"></i></a>
+  <a class="youtube" href="https://www.youtube.com/user/YouTubeJapan"><i class="fab fa-youtube"></i></a>
+</footer>
+
+
   </body>
+
 </html>

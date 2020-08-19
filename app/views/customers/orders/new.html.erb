@@ -1,2 +1,26 @@
-<h1>Orders#new</h1>
-<p>Find me in app/views/orders/new.html.erb</p>
+<h2>注文情報入力</h2>
+<strong>支払方法</strong>
+  <%= form_with(model: @book, local: true) do |f| %>
+    <div>
+      <%= f.radio_button :gender1, :male, checked: true  %>
+      <%= f.label :gender, "クレジットカード", {value: :male} %>
+      <%= f.radio_button :gender1, :female %>
+      <%= f.label :gender, "銀行振込", {value: :female} %>
+      <%= f.radio_button :gender, :now, checked: true  %>
+<strong>お届け先</strong>
+      <%= f.label :gender, "ご自身の住所", {value: :now} %>
+      <%= @order.customer.name %>
+      <%= f.radio_button :gender, :now2 %>
+      <%= f.label :gender, "登録済み住所から選択", {value: :now2} %>
+      <%= f.collection_select :customer_id, Customer.all, :id, :address %>
+      <%= f.radio_button :gender, :now3 %>
+      <%= f.label :gender, "新しいお届け先", {value: :now3} %>
+      <%= f.label :"郵便番号（ハイフンなし）" %>
+      <%= f.text_field :post_code %>
+      <%= f.label :"住所" %>
+      <%= f.text_field :address %>
+      <%= f.label :"宛名" %>
+      <%= f.text_field :name %>
+    </div>
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>

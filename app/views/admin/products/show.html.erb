@@ -1,4 +1,5 @@
 <h3>商品詳細</h3>
+<!-- 画像詳細画像の大きさは任せます -->
 <%= attachment_image_tag(@product, :image, :fill, 50, 50) %>
 <table>
 	<thead>
@@ -16,7 +17,11 @@
 		</tr>
 		<tr>
 			<th>税込価格（税抜価格）</th>
-			<th><%= @product.price %> * price_with_tax(<%= @product.price %>)</th>
+			<th>
+				<!-- 消費税計算メゾットは後で考える -->
+				<% (price = @product.price * 1.08 ) %>
+				<%= price.round %>円 (<%= @product.price %>円)
+			</th>
 		</tr>
 		<tr>
 			<th>販売ステータス</th>

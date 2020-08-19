@@ -13,7 +13,7 @@
 	  <% @products.each do |product| %>
 		<tr>
 			<td><%= product.id %></td>
-			<td><%= link_to product.name, admin_products_path(product) %></td>
+			<td><%= link_to product.name, admin_product_path(product) %></td>
 			<td><%= product.price %></td>
 			<td><%= product.genre.name %></td>
 			<td><%= product.is_active ? "販売中" : "売切れ"  %></td>

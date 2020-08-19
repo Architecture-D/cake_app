@@ -2,9 +2,9 @@ Rails.application.routes.draw do
 
   root 'home#top'
   get '/about', to: 'homes#about'
-  namespace :admin do
+  
    devise_for :admins
-  end
+  
   devise_for :customers
   resources :customers,only: [:show,:index,:edit,:update,:hide,:delete]
   resources :cart_items,only: [:create,:index,:destroy_all,:destroy,:update]

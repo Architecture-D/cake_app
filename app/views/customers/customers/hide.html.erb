@@ -1,0 +1,23 @@
+Customers#hide
+<!-- ヘッダー記載箇所イメージ -->
+ヘッダー部分
+
+<!-- 退会確認メッセージ -->
+<p><b>本当に退会しますか？</b></p>
+
+<p>退会すると、会員登録情報や</p>
+<p>これまでの購入履歴が閲覧できなくなります。</p>
+<p>退会する場合は、「退会する」をクリックしてください。</p>
+
+
+<div>
+<!-- 配送先一覧画面へのリンク部分 -->
+	<%= link_to customers_path do %>
+		<button>退会しない</button>　
+	<% end %>
+	
+<!-- 退会処理へのリンク部分 -->
+	<%= link_to customers_path, method: :delete do %>
+		<button>退会する</button>
+	<% end %>
+</div>

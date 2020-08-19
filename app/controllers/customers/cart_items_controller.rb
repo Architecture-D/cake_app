@@ -1,4 +1,4 @@
-class CartItemsController < ApplicationController
+class Cusotomers::CartItemsController < ApplicationController
   def create
   end
 

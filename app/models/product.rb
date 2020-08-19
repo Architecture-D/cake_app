@@ -5,7 +5,7 @@ class Product < ApplicationRecord
 	validates :introduction, presence: true, length:{ maximum: 300}
 	validates :price, presence: true, numericality:{ only_integer: true}
 
-	attachment :image_id
+	attachment :image
 
 	has_many :cart_items
 	has_many :customers, through: :cart_items

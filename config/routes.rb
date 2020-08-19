@@ -19,7 +19,6 @@ Rails.application.routes.draw do
     resources :products,only: [:index,:new,:create,:edit,:update]
     resources :order_details,only: [:update]
     resources :orders,only: [:index,:show,:update]
-  end
-
+  endあああ
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

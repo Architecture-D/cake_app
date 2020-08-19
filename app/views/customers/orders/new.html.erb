@@ -1,13 +1,13 @@
 <h2>注文情報入力</h2>
-<strong>支払方法</strong>
-  <%= form_with(model: @book, local: true) do |f| %>
+  <strong>支払方法</strong>
+  <%= form_with(model: @book, url: oders_path , local: true) do |f| %>
     <div>
       <%= f.radio_button :gender1, :male, checked: true  %>
       <%= f.label :gender, "クレジットカード", {value: :male} %>
       <%= f.radio_button :gender1, :female %>
       <%= f.label :gender, "銀行振込", {value: :female} %>
       <%= f.radio_button :gender, :now, checked: true  %>
-<strong>お届け先</strong>
+      <strong>お届け先</strong>
       <%= f.label :gender, "ご自身の住所", {value: :now} %>
       <%= @order.customer.name %>
       <%= f.radio_button :gender, :now2 %>

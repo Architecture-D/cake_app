@@ -1,14 +1,42 @@
-<h3>ログイン前ヘッダー</h3>
-<%= link_to "Home", root_path %>
-<%= link_to "About", home_about_path %>
-<%= link_to "商品一覧", products_path %>
-<%= link_to "新規登録", new_customer_registration_path %>
-<%= link_to "ログイン", new_customer_session_path %>
-<h1>顧客HOME</h1>
-<p>ジャンル検索BOX</p>
-<p>ようこそ、NaganoCakeへ！<br>
-このサイトは、ケーキ販売のECサイトになります。<br>
-会員でない方も商品の閲覧はできますが、<br>
-購入には会員登録が必要になります。</p>
-<p>おすすめ商品写真BOX</p>
-<%= link_to "もっとみる", products_path %>
+</div>
+	<div class="top">
+		<div class="cake-image">
+		</div>
+		<br><br>
+		<div class="container">
+ 			<div class="row">
+ 				<div class=col-xs-3>
+ 				</div>
+ 				<div class=col-xs-6>
+					<p class="home-text">ようこそ、NaganoCakeへ！<br><br>
+					このサイトは、ケーキ販売のECサイトになります。<br><br>
+					会員でない方も商品の閲覧はできますが、<br><br>
+					購入には会員登録が必要になります。</p>
+				</div>
+				<div class=col-xs-3>
+				</div>
+			</div>
+
+			<div class="row">
+ 				<div class=col-xs-2>
+ 				</div>
+ 				<div class=col-xs-8>
+ 				<br>
+                <h3>オススメ商品</h3>
+                <%= link_to "もっとみる", products_path,style: "float: right" %>
+                </div>
+ 				<div class=col-xs-2>
+ 				</div>
+		    </div>
+
+			<div class="row">
+ 				<div class=col-xs-2>
+ 				</div>
+ 				<div class=col-xs-8>
+ 				<br>
+                <h3>ジャンル検索</h3>
+                </div>
+ 				<div class=col-xs-2>
+ 				</div>
+		    </div>
+       </div>

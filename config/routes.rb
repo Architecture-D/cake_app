@@ -16,9 +16,9 @@ Rails.application.routes.draw do
     get '/top', to: 'homes#top'
     resources :customers,only: [:show,:index,:edit,:update]
     resources :genres,only: [:index,:create,:edit,:update]
-    resources :products,only: [:index,:new,:create,:edit,:update]
+    resources :products,only: [:index,:new,:create,:edit,:update,:show]
     resources :order_details,only: [:update]
     resources :orders,only: [:index,:show,:update]
-  endあああ
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

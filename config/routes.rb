@@ -22,7 +22,12 @@ Rails.application.routes.draw do
       end
     end
     resources :cart_items,only: [:create,:index,:destroy_all,:destroy,:update]
-    resources :orders,only: [:new,:confirm,:create,:thank,:index,:show]
+    resources :orders,only: [:new,:create,:index,:show] do
+      collection do
+        get 'confirm'
+        get 'thank'
+      end
+    end
     resources :destinations,only: [:index,:create,:destroy,:edit,:update]
   end
 

@@ -3,11 +3,7 @@ Rails.application.routes.draw do
   devise_for :admins, :controllers => {
     :sessions => 'admins/sessions'
   }
-
-  devise_for :customers, controllers: {
-    registrations: 'customers/registrations',
-    sessions: 'customers/sessions'
-  }
+  
   # devise_for :customers, skip: [:registration]
   #  devise_scope :customers do
   #    get 'customers/sign_up', to: 'devise/registrations#new', as: 'new_customer_registration'
@@ -19,9 +15,10 @@ Rails.application.routes.draw do
     get 'home/about', to: 'home#about'
     get '/products', to: 'products#index'
     get '/products/:id', to: 'products#show'
-    resource :customers,only: [:show,:index,:edit,:update,:destroy] do
+    resource :customers,only: [:show,:index,:update,:destroy] do
       collection do
         get 'hide'
+        get 'edit_info'
       end
     end
     resources :cart_items,only: [:create,:index,:destroy_all,:destroy,:update]
@@ -37,6 +34,12 @@ Rails.application.routes.draw do
     resources :order_details,only: [:update]
     resources :orders,only: [:index,:show,:update]
   end
+
+  devise_for :customers, controllers: {
+    registrations: 'customers/registrations',
+    sessions: 'customers/sessions',
+    passwords: 'customers/passwords'
+  }
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

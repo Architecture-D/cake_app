@@ -1,49 +1,75 @@
+<div class="sign_up">
+  <br>
+  <div class="container">
+    <div class="row">
 
-<h2>新規会員登録</h2>
+      <div class="col-xs-2">
+      </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="col-xs-2">
+        <h3>新規会員登録</h3><br>
+        <p>名前</p><p>フリガナ</p><p>メールアドレス</p><p>郵便番号(ハイフンなし)</p><p>住所</p>
+        <p>電話番号</p><p>パスワード(6文字以上)</p><p>パスワード(確認用)</p>
+      </div>
+      <div class="col-xs-6">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    姓<%= f.text_field :last_name, autofocus: true %>
+        <div class="field">
+          <br><br><br><br>
+          <%= f.text_field :last_name, autofocus: true, placeholder: "姓"%>
+          <%= f.text_field :first_name, autofocus: true, placeholder: "名"%>
+        </div>
+        <br>
+        <div class="field">
+          <%= f.text_field :last_name_kana, autofocus: true, placeholder: "セイ" %>
+          <%= f.text_field :first_name_kana, autofocus: true, placeholder: "メイ" %>
+        </div><br>
+        <div class="field">
+          <%= f.email_field :email, autofocus: true, placeholder: "メールアドレス",:size=>"25" %>
+        </div><br>
+        <div class="field">
+          <%= f.text_field :post_code, autofocus: true, placeholder: "郵便番号",:size=>"25" %>
+        </div><br>
+        <div class="field">
+          <%= f.text_field :address, autofocus: true, placeholder: "住所", :size=>"50" %>
+        </div><br>
+        <div class="field">
+          <%= f.text_field :phone_number, autofocus: true, placeholder: "電話番号",:size=>"25" %>
+        </div><br>
+        <div class="field">
+          <%= f.password_field :password, placeholder: "パスワード",:size=>"25"%>
+        </div><br>
+        <div class="field">
+          <%= f.password_field :password_confirmation, placeholder: "パスワード確認",:size=>"25"%>
+        </div><br>
+        <div class="actions">
+          <%= f.submit "新規登録",:size=>"25",class:"btn btn-success" %>
+        </div>
+        <% end %>
+      </div>
 
-    名<%= f.text_field :first_name, autofocus: true %>
-  </div>
-<br>
-  <div class="field">
-    セイ<%= f.text_field :last_name_kana, autofocus: true %>
+      <div class="col-xs-2">
+      </div>
 
-    メイ<%= f.text_field :first_name_kana, autofocus: true %>
-  </div>
-<br>
-  <div class="field">
-    メール<%= f.email_field :email, autofocus: true %>
-  </div>
-<br>
-  <div class="field">
-    郵便番号<%= f.text_field :post_code, autofocus: true %>
-  </div>
-<br>
-  <div class="field">
-    住所<%= f.text_field :address, autofocus: true %>
-  </div>
-<br>
-  <div class="field">
-    電話番号<%= f.text_field :phone_number, autofocus: true %>
-  </div>
-<br>
-  <div class="field">
-    パスワード<%= f.password_field :password %>
-  </div>
-<br>
-  <div class="field">
-    確認用<%= f.password_field :password_confirmation %>
-  </div>
-<br>
-  <div class="actions">
-    <%= f.submit "新規登録",class:"btn btn-success"%>
-  </div>
-<% end %>
+    </div>
 
-<%= render "devise/shared/links" %>
+    <div class="row">
+
+      <div class="col-xs-2">
+      </div>
+
+      <div class="col-xs-8">
+        <h4>既に登録済みの方</h4>
+        <p class="kochira"><%= link_to "こちら", new_customer_session_path %>からログインしてください。</p>
+      </div>
+
+      <div class="col-xs-2">
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
 

@@ -1,25 +1,45 @@
 class Customers::DestinationsController < ApplicationController
   def index
-    @destination = Destinations.new
-    @desitinations = Destinations.all
+    @destination = Destination.new
+    @destinations = Destination.all
   end
 
   def create
-    @destination = Destinations.new
-    @destination.customer_id = current_user.id
-    if @destination_new.save
-      redirect_to destinations_path(@destinations_new), notice: "You have created book successfully."
+    @destination = Destination.new(destination_params)
+    @destination.customer_id = current_customer.id
+    if @destination.save
+      redirect_to destinations_path, notice: "You have created book successfully."
     else
-      @destinations = Destinations.all
+      @destinations = Destination.all
       render 'index'
+    end
   end
 
   def destroy
+    @destination = Destination.find(params[:id])
+    @destination.customer_id = current_customer.id
+    @destination.destroy
+    redirect_to destinations_path(@destination.id)
   end
 
   def edit
+    @destination = Destination.find(params[:id])
+    @destination.customer_id = current_customer.id
   end
 
   def update
+    @destination = Destination.find(params[:id])
+    if @destination.update(destination_params)
+      redirect_to destinations_path, notice: "You have updated book successfully."
+    else
+      render "edit"
+    end
   end
+
+  private
+
+  def destination_params
+    params.require(:destination).permit(:post_code, :address, :name)
+  end
+
 end

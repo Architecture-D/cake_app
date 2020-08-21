@@ -1,20 +1,21 @@
 <h2>注文情報入力</h2>
   <strong>支払方法</strong>
-  <%= form_with(model: @book, url: oders_path , local: true) do |f| %>
+  <%= form_with(model: @oder, local: true) do |f| %>
     <div>
-      <%= f.radio_button :gender1, :male, checked: true  %>
-      <%= f.label :gender, "クレジットカード", {value: :male} %>
-      <%= f.radio_button :gender1, :female %>
-      <%= f.label :gender, "銀行振込", {value: :female} %>
-      <%= f.radio_button :gender, :now, checked: true  %>
+      <%= f.radio_button :payment_method, :true, checked: true %>
+      <%= f.label :"クレジットカード" %>
+      <%= f.radio_button :payment_method, :false %>
+      <%= f.label :"銀行振込" %>
       <strong>お届け先</strong>
-      <%= f.label :gender, "ご自身の住所", {value: :now} %>
-      <%= @order.customer.name %>
-      <%= f.radio_button :gender, :now2 %>
-      <%= f.label :gender, "登録済み住所から選択", {value: :now2} %>
+      <%= f.radio_button :add, 1, checked: true  %>
+      <%= f.label :"ご自身の住所" %>
+      <%= @customer.address %>
+      <%= @customer.first_name %>
+      <%= f.radio_button :add, 2 %>
+      <%= f.label :"登録済み住所から選択" %>
       <%= f.collection_select :customer_id, Customer.all, :id, :address %>
-      <%= f.radio_button :gender, :now3 %>
-      <%= f.label :gender, "新しいお届け先", {value: :now3} %>
+      <%= f.radio_button :add, 3 %>
+      <%= f.label :"新しいお届け先" %>
       <%= f.label :"郵便番号（ハイフンなし）" %>
       <%= f.text_field :post_code %>
       <%= f.label :"住所" %>

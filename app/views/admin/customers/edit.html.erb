@@ -1,17 +1,11 @@
-Admin::Customers#edit画面
-<!-- ヘッダー記載箇所イメージ -->
-ヘッダー部分
-
 <!-- タイトル -->
-<p>
-	<%= @customer.last_name %>
-	<%= @customer.first_name %>
-	の会員情報編集
-</p>
+<h3 class="admin-title">
+ <%= @customer.last_name %> <%= @customer.first_name %>さんの会員情報編集
+</h3><br>
 
 
 <!-- 編集フォーム部分 -->
-	
+
 <%= form_for(@customer, url: admin_customer_path) do |f| %>
 
 	<!-- エラーメッセージ表示-->
@@ -25,52 +19,42 @@ Admin::Customers#edit画面
 			</ul>
 		</div>
 	<% end %>
-	
+<div class="row">
+ <div class="col-xs-2">
+
+	<p>会員ID：<span><%= @customer.id %></span></p>
+	<div class="customer-text"><p>名前</p><p>フリガナ</p><p>郵便番号(ハイフンなし)</p><p>住所</p><p>電話番号(ハイフンなし)</p><p>メールアドレス</p><p>会員ステータス</p></div>
+ </div>
+ <div class="col-xs-5"><br><br>
 	<!-- フォーム部分 -->
 	<div>
-		<label>会員ID</label>
-		<span><%= @customer.id %></span>
-	</div>
-
-	<div>
-		<label>名前</label>
-		<span>（姓）</span>
 		<%= f.text_field :last_name %>
-		<span>（名）</span>
 		<%= f.text_field :first_name %>
-	</div>
+	</div><br>
 
 	<div>
-		<label>フリガナ</label>
-		<span>（セイ）</span>
 		<%= f.text_field :last_name_kana %>
-		<span>（メイ）</span>
 		<%= f.text_field :first_name_kana %>
-	</div>
+	</div><br>
 
 	<div>
-		<label>郵便番号（ハイフンなし）</label>
 		<%= f.text_field :post_code %>
-	</div>
+	</div><br>
 
 	<div>
-		<label>住所</label>
-		<%= f.text_field :address %>
-	</div>
+		<%= f.text_field :address, :size=>"42"%>
+	</div><br>
 
 	<div>
-		<label>電話番号（ハイフンなし）</label>
 		<%= f.text_field :phone_number %>
-	</div>
+	</div><br>
 
 	<div>
-		<label>メールアドレス</label>
-		<%= f.text_field :email %>
-	</div>
+		<%= f.text_field :email , :size=>"42"%>
+	</div><br>
 
 	<!-- ラジオボタン -->
 	<div>
-		<label>会員ステータス</label>
 		<label>
 			<%= f.radio_button :is_deleted, false %>
 			有効
@@ -79,11 +63,12 @@ Admin::Customers#edit画面
 			<%= f.radio_button :is_deleted, true %>
 			無効
 		</label>
-	</div>	
-
+	</div>
+ </div>
+</div>
 	<!-- サブミットボタン -->
 	<div>
-		<%= f.submit "変更を保存する" %>
+		<%= f.submit "変更を保存する", class:"btn btn-primary" %>
 	</div>
 
 

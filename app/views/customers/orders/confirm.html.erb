@@ -7,23 +7,32 @@
 			<th>数量</th>
 			<th>小計</th>
 		</tr>
-	</thead>
-	<tbody>
+		<% sum_all = 0 %>
+	    <% @cart_items.each do |item| %>
 		<tr>
 			<td>
-				<%= attachment_image_tag(@book.user, :profile_image, :fill, 100, 100, fallback: "no-image-mini.jpg") %>
+				<%= attachment_image_tag item.product, :image, :fill, 50, 50 %>
+				<%= item.product.name %>
 			</td>
-			<td>単価</td>
-			<td>数量</td>
-			<td>小計</td>
+			<td>
+				¥<%= item.product.tax_include_price %>
+			</td>
+			<td>
+				<%= item.quantity %>
+			</td>
+			<td>
+				¥<%= sum_product = item.product.tax_include_price.to_i * item.quantity %>円
+        		<% sum_all += sum_product %>
+			</td>
 		</tr>
-	</tbody>
+		<% end %>
+	</thead>
 </table>
 <table>
 	<thead>
 		<tr>
 			<th>送料</th>
-			<th>800円</th>
+			<th><%= @order.shipping_cost %></th>
 		</tr>
 		<tr>
 			<th>商品合計</th>
@@ -36,5 +45,8 @@
 	</thead>
 </table>
 <strong>支払方法</strong>
-クレジットカード
-<strong>お届け先</stro
+<%= @order.payment_method %>
+<strong>お届け先</strong>
+<%= @order.post_code %>
+<%= @order.address %>
+<%= @order.name %>

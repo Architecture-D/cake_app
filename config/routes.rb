@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     resources :cart_items,only: [:create,:index,:destroy_all,:destroy,:update]
     resources :orders,only: [:new,:create,:index,:show] do
       collection do
-        get 'confirm'
+        post 'confirm'
         get 'thank'
       end
     end

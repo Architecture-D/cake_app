@@ -1,4 +1,5 @@
 class Customers::CustomersController < ApplicationController
+
   def show
     @customer = current_customer
   end
@@ -6,14 +7,14 @@ class Customers::CustomersController < ApplicationController
   def edit_info
     @customer = current_customer
     if current_customer != @customer
-      redirect_to customer_path(current_customer.id)
+      redirect_to customer_path
     end
   end
 
   def update
     @customer = current_customer
     if @customer.update(customer_params)
-      redirect_to customers_path(@custmer), notice: "You have updated successfully."
+      redirect_to customers_path, notice: "You have updated successfully."
     else
       @customer = current_customer
       render "edit_info"

@@ -1,30 +1,60 @@
 class Customers::CartItemsController < ApplicationController
 
+
   def create
     @cart_item = current_customer.cart_items.new(cart_item_params)
     @already_cart_item = CartItem.find_by( product_id: @cart_item.product_id )
     if @already_cart_item.nil?
       @cart_item.save
     else
-      @cart_item.quantity += params[:cart_item][:quantity].to_i
-      @already_cart_item.update(quantity: @cart_item.quantity)
+      @already_cart_item.increment!(:quantity, params[:cart_item][:quantity].to_i)
+      # @already_cart_item.quantity += params[:cart_item][:quantity].to_i
+      # @already_cart_item.save
     end
     redirect_to cart_items_path
   end
 
-# def create
-#     @cart_item_new = CartItem.new(cart_item_params)
-#     # @cart_item = current_customer.cart_items
-#     @already_cart_item = current_customer.cart_items.find_by( product_id: params[:cart_item][:product_id])
-#     if @already_cart_item.present?
-#       @already_cart_item.quantity += params[:cart_item][:quantity].to_i
-#       @already_cart_item.update(quantity: @already_cart_item.quantity)
-#       @cart_item_new = @already_cart_item
-#     else
-#       @cart_item_new.save
-#     end
-#       redirect_to cart_items_path
-#   end
+ #ケニーさんが今作ったやつ
+ #  def create
+ #    @cart_item = current_customer.cart_items.new(cart_item_params)
+ #    @already_cart_item = CartItem.find_by( product_id: @cart_item.product_id )
+ #    if @already_cart_item.nil?
+ #      @cart_item.save
+ #    else
+ #      @already_cart_item.quantity += params[:cart_item][:quantity].to_i
+ #      @already_cart_item.update(quantity: @already_cart_item.quantity)
+ #    end
+ #    redirect_to cart_items_path
+ #  end
+ # 12:25 PM | Today
+
+#ケニーさんと夜作ったやつ
+  # def create
+  #   @cart_item = current_customer.cart_items.new(cart_item_params)
+  #   @already_cart_item = CartItem.find_by( product_id: @cart_item.product_id )
+  #   if @already_cart_item.nil?
+  #     @cart_item.save
+  #   else
+  #     @cart_item.quantity += params[:cart_item][:quantity].to_i
+  #     @already_cart_item.update(quantity: @cart_item.quantity)
+  #   end
+  #   redirect_to cart_items_path
+  # end
+
+  # メンターさんが作ったやつ
+  # def create
+  #     @cart_item_new = CartItem.new(cart_item_params)
+  #     # @cart_item = current_customer.cart_items
+  #     @already_cart_item = current_customer.cart_items.find_by( product_id: params[:cart_item][:product_id])
+  #     if @already_cart_item.present?
+  #        @already_cart_item.quantity += params[:cart_item][:quantity].to_i
+  #        @already_cart_item.update(quantity: @already_cart_item.quantity)
+  #        @cart_item_new = @already_cart_item
+  #     else
+  #        @cart_item_new.save
+  #     end
+  #     redirect_to cart_items_path
+  # end
 
 
 
@@ -45,7 +75,7 @@ class Customers::CartItemsController < ApplicationController
 
   def update
     @cart_item = CartItem.find(params[:id])
-    @cart_item.update(cart_item_path)
+    @cart_item.update(cart_item_params)
     redirect_to cart_items_path
   end
 

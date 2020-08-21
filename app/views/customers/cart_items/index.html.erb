@@ -1,14 +1,20 @@
-<h3>ショッピングカート</h3>
+<div class="row">
+ <div class="col-xs-1">
+ </div>
+ <div class="col-xs-10">
+
+<br>
+<h3><i class="fas fa-shopping-cart"></i>ショッピングカート</h3>
 
 <div class="pull-right">
-	<%= link_to cart_items_path, method: :delete, class: "btn btn-danger" do %>
+	<%= link_to cart_items_path, method: :delete, class: "btn btn-sm btn-danger" do %>
 		<h5>カートを空にする</h5>
 	<% end %>
 </div>
-<table class="table table-bordered">
+<table class="table table-striped">
 		<tr>
 			<th>商品名</th>
-			<th>単価（税込）</th>
+			<th>単価(税込)</th>
 			<th>数量</th>
 			<th>小計</th>
 			<th></th>
@@ -17,7 +23,7 @@
 	<% @cart_items.each do |item| %>
 		<tr>
 			<td>
-				<%= attachment_image_tag item.product, :image, :fill, 50, 50 %>
+				<%= attachment_image_tag item.product, :image, :fill, 55, 55 %>
 				<%= item.product.name %>
 			</td>
 			<td>
@@ -30,11 +36,11 @@
         		<% end %>
 			</td>
 			<td>
-				¥<%= sum_product = item.product.tax_include_price.to_i * item.quantity %>円
+				¥<%= sum_product = item.product.tax_include_price.to_i * item.quantity %>
         		<% sum_all += sum_product %>
 			</td>
 			<td>
-				<%= link_to '削除する', cart_item_path(item), method: :delete, class: "btn btn-danger" %>
+				<%= link_to '削除', cart_item_path(item), method: :delete, class: "btn btn-danger" %>
 			</td>
 		</tr>
 		<% end %>
@@ -42,8 +48,10 @@
 <div class="pull-right">
 	<table class="table table-bordered">
 		<tr>
+			<div>
 			<td>合計金額</td>
 			<td>¥<%= sum_all %></td>
+		    </div>
 		</tr>
 	</table>
 </div>
@@ -51,3 +59,8 @@
 <%= link_to "買い物を続ける", products_path, class: "btn btn-primary"  %>
 
 <%= link_to "情報入力に進む", new_order_path, class: "btn btn-success"  %>
+
+ </div>
+ <div class="col-xs-1">
+ </div>
+</div>

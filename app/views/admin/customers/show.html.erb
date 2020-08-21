@@ -1,13 +1,14 @@
-Admin::Customers#show画面
-<!-- ヘッ載箇所イメージ -->
-ヘッダー部分
 
 <!-- タイトル -->
-<%= @customer.last_name %><%= @customer.first_name %>の会員詳細
+<h3 class="admin-title">
+	<%= @customer.last_name %> <%= @customer.first_name %>さんの会員詳細
+</h3><br>
 
 <!-- 登録情報一覧 -->
 <!-- customer情報の表示 -->
-<table>
+<div class="row">
+ <div class="col-xs-6">
+<table class="table table-striped">
 	<tr>
 		<th>顧客ID</th>
 		<td>
@@ -15,9 +16,9 @@ Admin::Customers#show画面
 
 			<!-- 有効会員／無効会員で色変える感じ？ -->
 			<% if @customer.is_deleted != true %>
-				<span>有効会員</span>
+				<span class="Yuko">有効会員</span>
 			<% else %>
-				<span>無効会員</span>
+				<span class="Muko">無効会員</span>
 			<% end %>
 		</td>
 	</tr>
@@ -32,7 +33,7 @@ Admin::Customers#show画面
 		<th>カナ</th>
 		<td>
 			<span><%= @customer.last_name_kana %></span>
-			<span><%= @customer.first_name_kana %></span>	
+			<span><%= @customer.first_name_kana %></span>
 		</td>
 	</tr>
 	<tr>
@@ -64,11 +65,13 @@ Admin::Customers#show画面
 <div>
 	<!-- カスタマー情報変更画面へのリンク部分 -->
 	<%= link_to edit_admin_customer_path do %>
-		<button>編集する</button>　
+		<button class="btn btn-primary">編集する</button>
 	<% end %>
 
 	<!-- 注文履歴一覧へのリンク部分 -->
 	<%= link_to admin_orders_path do %>
-		<button>注文履歴一覧を見る</button>
+		<button class="btn btn-success">注文履歴一覧を見る</button>
 	<% end %>
 </div>
+
+</div></div>

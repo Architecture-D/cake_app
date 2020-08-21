@@ -3,7 +3,7 @@ class Customers::CustomersController < ApplicationController
     @customer = current_customer
   end
 
-  def edit
+  def edit_info
     @customer = current_customer
     if current_customer != @customer
       redirect_to customer_path(current_customer.id)
@@ -16,7 +16,7 @@ class Customers::CustomersController < ApplicationController
       redirect_to customers_path(@custmer), notice: "You have updated successfully."
     else
       @customer = current_customer
-      render "edit"
+      render "edit_info"
     end
   end
 
@@ -24,12 +24,12 @@ class Customers::CustomersController < ApplicationController
   end
 
   def delete
-    @customer = Customer.current_costomer
+    @customer = current_costomer
     @customer.destroy
     redirect_to root_path
   end
-end
 
   def customer_params
     params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :post_code, :adress, :phone_number, :email, :password, :is_deleted)
   end
+end

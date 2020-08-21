@@ -4,6 +4,7 @@ class Customers::OrdersController < ApplicationController
   end
 
   def confirm
+    @order = Order.new(order_params)
   end
 
   def create
@@ -16,5 +17,10 @@ class Customers::OrdersController < ApplicationController
   end
 
   def show
+  end
+
+  private
+  def order_params
+    params.require(:order).permit(:)
   end
 end

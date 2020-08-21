@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     root 'home#top'
     get 'home/about', to: 'home#about'
     get '/products', to: 'products#index'
-    get '/products/:id', to: 'products#show'
+    get '/products/:id', to: 'products#show', as: 'product'
     delete 'cart_items', to: 'cart_items#destroy_all'
     resource :customers,only: [:show,:index,:update,:destroy] do
       collection do
@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     resources :cart_items,only: [:create,:index,:destroy_all,:destroy,:update]
     resources :orders,only: [:new,:create,:index,:show] do
       collection do
-        get 'confirm'
+        post 'confirm'
         get 'thank'
       end
     end

@@ -11,25 +11,24 @@ class Customers::OrdersController < ApplicationController
     @order.payment_method = params[:order][:payment_method]
     @add = params[:order][:add].to_i
     case @add
-        when 1
-          @order.post_code = @customer.post_code
-          @order.address = @customer.address
-          #フルネームにする
-          @order.name = @current.first_name
-        when 2
-          #なんでアドレスで持ってこれる？
-          @sta = params[:order][:address].to_i
-          @send_to_address = Destinations.find(@sta)
-          @order.post_code = @send_to_address.post_code
-          @order.address = @send_to_address.address
-          @order.name = @send_to_address.name
-        when 3
-          #[:new_add]って何？
-          @order.post_code = params[:order][:new_add][:post_code]
-          @order.address = params[:order][:new_add][:address]
-          @order.name = params[:order][:new_add][:name]
-      end
-
+      when 1
+        @order.post_code = @customer.post_code
+        @order.address = @customer.address
+        #フルネームにする
+        @order.name = @customer.first_name
+      when 2
+        #なんでアドレスで持ってこれる？
+        @sta = params[:order][:address].to_i
+        @send_to_address = Destination.find(@sta)
+        @order.post_code = @send_to_address.post_code
+        @order.address = @send_to_address.address
+        @order.name = @send_to_address.name
+      when 3
+        #[:new_add]って何？
+        @order.post_code = params[:order][:new_add][:post_code]
+        @order.address = params[:order][:new_add][:address]
+        @order.name = params[:order][:new_add][:name]
+    end
   end
 
   def create

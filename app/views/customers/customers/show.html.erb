@@ -12,9 +12,6 @@ Customers＃show 画面
 	<%= link_to edit_info_customers_path do %>
 		<button>編集する</button>　
 	<% end %>
-	<%= link_to edit_customer_registration_path do %>
-		<button>パスワードを変更する</button>　
-	<% end %>
 </div>
 
 <!-- customer情報の表示 -->
@@ -55,6 +52,12 @@ Customers＃show 画面
 		<th>メールアドレス</th>
 		<td>
 			<span><%= @customer.email %></span>
+		</td>
+	</tr>
+	<tr>
+	    <th>パスワード</th>
+		<td>
+			<span><%= @customer.password %></span>
 		</td>
 	</tr>
 </table>

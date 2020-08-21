@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :admins, :controllers => {
     :sessions => 'admins/sessions'
   }
-  
+
   # devise_for :customers, skip: [:registration]
   #  devise_scope :customers do
   #    get 'customers/sign_up', to: 'devise/registrations#new', as: 'new_customer_registration'
@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     get 'home/about', to: 'home#about'
     get '/products', to: 'products#index'
     get '/products/:id', to: 'products#show'
+    delete 'cart_items', to: 'cart_items#destroy_all'
     resource :customers,only: [:show,:index,:update,:destroy] do
       collection do
         get 'hide'
@@ -22,7 +23,12 @@ Rails.application.routes.draw do
       end
     end
     resources :cart_items,only: [:create,:index,:destroy_all,:destroy,:update]
-    resources :orders,only: [:new,:confirm,:create,:thank,:index,:show]
+    resources :orders,only: [:new,:create,:index,:show] do
+      collection do
+        get 'confirm'
+        get 'thank'
+      end
+    end
     resources :destinations,only: [:index,:create,:destroy,:edit,:update]
   end
 

@@ -1,9 +1,17 @@
-<h3>商品詳細</h3>
-<%= attachment_image_tag(@product, :image, :fill, 50, 50) %>
-<table>
+
+<div class="row">
+<h3 class="admin-title">商品詳細</h3><br>
+</div>
+<!-- 画像詳細画像の大きさは任せます -->
+<div class="row">
+<div class="col-xs-3">
+<%= attachment_image_tag(@product, :image, :fill, 250, 250) %>
+</div>
+<div class="col-xs-6">
+<table class="table">
 	<thead>
 		<tr>
-			<th>商品名</th>
+			<th class="col-xs-4">商品名</th>
 			<th><%= @product.name %></th>
 		</tr>
 		<tr>
@@ -16,7 +24,11 @@
 		</tr>
 		<tr>
 			<th>税込価格（税抜価格）</th>
-			<th><%= @product.price %> * price_with_tax(<%= @product.price %>)</th>
+			<th>
+				<!-- 消費税計算メゾットは後で考える -->
+				<% (price = @product.price * 1.08 ) %>
+				<%= price.round %>円 (<%= @product.price %>円)
+			</th>
 		</tr>
 		<tr>
 			<th>販売ステータス</th>
@@ -24,4 +36,5 @@
 		</tr>
 	</thead>
 </table>
-<%= link_to "編集する", edit_admin_product_path(@product), class: "btn-sm btn-success" %>
+<%= link_to "編集する", edit_admin_product_path(@product), class: "btn btn-primary", :style=>"float:right;"%>
+</div>

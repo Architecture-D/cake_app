@@ -1,2 +1,32 @@
-<h1>Orders#new</h1>
-<p>Find me in app/views/orders/new.html.erb</p>
+<h2>注文情報入力</h2>
+  <strong>支払方法</strong>
+  <%= form_with(model: @oder,url: local: true) do |f| %>
+    <div>
+      <%= f.radio_button :payment_method, :true, checked: true %>
+      <%= f.label :"クレジットカード" %>
+      <%= f.radio_button :payment_method, :false %>
+      <%= f.label :"銀行振込" %>
+      <strong>お届け先</strong>
+      <%= f.radio_button :add, 1, checked: true  %>
+      <%= f.label :"ご自身の住所" %>
+      <%= @customer.post_code %>
+      <%= @customer.address %>
+      <%= @customer.first_name %>
+      <%= f.radio_button :add, 2 %>
+      <%= f.label :"登録済み住所から選択" %>
+<!--       何でアドレス引っ張ってこれる？
+      <%= f.collection_select :send_to_address, @customer.addresses, :id, :address %> -->
+      <%= f.collection_select :customer_id, Customer.all, :id, :address %>
+      <%= f.radio_button :add, 3 %>
+      <%= f.label :"新しいお届け先" %>
+      <%= f.fields_for :new_add do |n| %>
+        <%= n.label :"郵便番号（ハイフンなし）" %>
+        <%= n.text_field :post_code %>
+        <%= n.label :"住所" %>
+        <%= n.text_field :address %>
+        <%= n.label :"宛名" %>
+        <%= n.text_field :name %>
+      <% end %>
+    </div>
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>

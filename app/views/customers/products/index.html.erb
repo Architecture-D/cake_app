@@ -1,10 +1,29 @@
-<h3>ログイン前or後ヘッダー</h3>
-<%= link_to "Home", root_path %>
-<%= link_to "About", home_about_path %>
-<%= link_to "商品一覧", products_path %>
-<%= link_to "新規登録", new_customer_registration_path %>
-<%= link_to "ログイン", new_customer_session_path %>
-<h1>商品一覧画面</h1>
-<p>ジャンル検索BOX</p>
-<P>商品一覧each do的なん<p>
-<P>ページング機能</P>
+<div class="products-index"><br>
+ <div class="row">
+
+  <div class="col-xs-2">
+   <h3>ジャンル検索</h3>
+  </div>
+  <div class="col-xs-10">
+
+  	<% @genres.each do |genre| %>
+  	<%= genre.name %>
+  	<% end %>
+
+  </div>
+ </div>
+ <div class="row">
+  	<h2>商品一覧</h2>
+  	 <% @products.each do |product| %>
+  	 　<div class="col-xs-4">
+        <%= link_to products_path(product.id) do %>
+  	    <%= attachment_image_tag product, :image, :fill, 380, 380%>
+        <% end %>
+        <%= product.name %><br>
+       ¥<%= product.price %>
+      </div>
+     <% end %>
+ </div>
+
+
+</div>

@@ -32,6 +32,7 @@ body {
     background-color:rgba(0,0,0,0.05);
     min-height:800px;
 }
+
 header{
 	background-color:rgba(255,255,255,0.5);
 	height: 70px;
@@ -64,17 +65,24 @@ footer i{
 	color:rgba(0, 0, 0, 0.7);
 	height: 70px;
 }
+.admin-title{
+	font-weight: bold;
+}
+.top{
+	margin-top:-70px;
+}
 .cake-image{
 	height:900px;
 	background-image: url("/images/ケーキ.jpg");
     background-size:cover;
 }
-.top{
-	margin-top:-70px;
-}
 .home-text{
 	text-align: center;
 	font-size:15px;
+	background-color: white;
+	margin-top: -40px;
+	margin-bottom:-13px;
+	font-size: 20px;
 }
 .top h3{
 	text-align: center;
@@ -85,4 +93,36 @@ footer i{
 .insta{
 	color:#cc6699;
 }
+
+.about-text{
+	text-align: center;
+	padding-right:450px;
+	padding-top:100px;
+	font-size:20px;
+}
+.cakeya{
+	float:left;
+	margin-right:30px;
+	margin-bottom:80px;
+}
+.about-cake-image{
+	height: 600px;
+	background-image: url("/images/ケーキ3.jpg");
+    background-size:cover;
+}
+
+.login{
+	text-align: center;
+}
+.forgot{
+	text-align: right;
+}
+.sign_up p{
+	height:37px;
+}
+
+.margin-right{
+	margin-right: 40px;
+}
+
 

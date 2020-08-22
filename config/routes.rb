@@ -16,10 +16,12 @@ Rails.application.routes.draw do
     get '/products', to: 'products#index'
     get '/products/:id', to: 'products#show', as: 'product'
     delete 'cart_items', to: 'cart_items#destroy_all'
-    resource :customers,only: [:show,:index,:update,:destroy] do
+    resource :customers,only: [:show,:index] do
       collection do
         get 'hide'
         get 'edit_info'
+        patch 'update_info'
+        put 'withdrawal'
       end
     end
     resources :cart_items,only: [:create,:index,:destroy_all,:destroy,:update]

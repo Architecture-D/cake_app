@@ -8,33 +8,31 @@
 <%= attachment_image_tag(@product, :image, :fill, 250, 250) %>
 </div>
 <div class="col-xs-6">
-<table class="table">
-	<thead>
+	<table class="table">
 		<tr>
 			<th class="col-xs-4">商品名</th>
-			<th><%= @product.name %></th>
+			<td><%= @product.name %></td>
 		</tr>
 		<tr>
 			<th>商品説明</th>
-			<th><%= @product.introduction %></th>
+			<td><%= @product.introduction %></td>
 		</tr>
 		<tr>
 			<th>ジャンル</th>
-			<th><%= @product.genre.name %></th>
+			<td><%= @product.genre.name %></td>
 		</tr>
 		<tr>
 			<th>税込価格（税抜価格）</th>
-			<th>
+			<td>
 				<!-- 消費税計算メゾットは後で考える -->
 				<% (price = @product.price * 1.08 ) %>
 				<%= price.round %>円 (<%= @product.price %>円)
-			</th>
+			</td>
 		</tr>
 		<tr>
 			<th>販売ステータス</th>
-			<th><%= @product.is_active ? "販売中" : "売切れ"  %></th>
+			<td><%= @product.is_active ? "販売中" : "売切れ"  %></td>
 		</tr>
-	</thead>
-</table>
-<%= link_to "編集する", edit_admin_product_path(@product), class: "btn btn-primary", :style=>"float:right;"%>
+	</table>
+	<%= link_to "編集する", edit_admin_product_path(@product), class: "btn btn-primary", :style=>"float:right;"%>
 </div>

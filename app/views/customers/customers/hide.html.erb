@@ -17,7 +17,7 @@ Customers#hide
 	<% end %>
 	
 <!-- 退会処理へのリンク部分 -->
-	<%= link_to customers_path(current_customer.id), method: :delete do %>
+	<%= link_to withdrawal_customers_path, method: :put do %>
 		<button>退会する</button>
 	<% end %>
 </div>

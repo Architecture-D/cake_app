@@ -1,6 +1,6 @@
 class Customers::CartItemsController < ApplicationController
 
-
+  # 完成形
   def create
     @cart_item = current_customer.cart_items.new(cart_item_params)
     @already_cart_item = CartItem.find_by( product_id: @cart_item.product_id )

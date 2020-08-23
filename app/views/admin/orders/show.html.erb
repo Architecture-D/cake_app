@@ -1,2 +1,72 @@
-<h1>Admin::Orders#show</h1>
-<p>Find me in app/views/admin/orders/show.html.erb</p>
+<h3>注文履歴詳細</h3>
+
+<%= form_for(@order, url:admin_order_path,method: :patch) do |f| %>
+<table class="table">
+	<tr>
+		<th>購入者</th>
+		<th>配送先</th>
+		<th>支払方法</th>
+		<th>注文ステータス</th>
+	</tr>
+	<tr>
+		<td>
+			<%= @order.name %>
+		</td>
+		<td>
+			<%= @order.address %>
+		</td>
+		<td>
+			<%= @order.payment_method %>
+		</td>
+		<td>
+			<%= f.select :status, Order.status.keys.to_a %>
+			<%= f.submit '更新' ,class: "btn btn-primary" %>
+		</td>
+	</tr>
+</table>
+
+<table class="table">
+	<tr>
+		<th>商品名</th>
+		<th>単価（税込）</th>
+		<th>数量</th>
+		<th>小計</th>
+		<th>製作ステータス</th>
+		<th></th>
+	</tr>
+	<%= f.fields_for :order_product do |o| %>
+	<tr>
+		<td><%= o.object.product.name %></td>
+		<td><%= addTax(o.object.product.price) %>円</td>
+		<td><%= o.object.quantity %></td>
+		<td><%= totalPrice(addTax(o.object.product.price),o.object.quantity) %></td>
+		<td>
+			<%= i.select :make_status, OrderProduct.make_status.keys.to_a %>
+		</td>
+		<td>
+			<%= f.submit "更新", class: "btn btn-primary" %>
+		</td>
+	</tr>
+</table>
+
+
+<table class="table">
+	<tr>
+		<th>商品合計</th>
+		<td><%= addTax(@items.sum(:price)) %></td>
+	</tr>
+	<tr>
+		<th>送料</th>
+		<td><%= @order.shipping_cost %></td>
+	</tr>
+	<tr>
+		<th>請求額合計</th>
+		<td><%= addTax(@items.sum(:price)) + @order.shipping_cost %></td>
+	</tr>
+</table>
+
+<% end %>
+
+
+
+

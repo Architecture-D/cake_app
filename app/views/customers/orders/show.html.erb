@@ -1,2 +1,85 @@
-<h1>Orders#show</h1>
-<p>Find me in app/views/orders/show.html.erb</p>
+<h3>注文履歴詳細</h3>
+<strong>注文情報</strong>
+<table>
+	<thead>
+		<tr>
+			<th>注文日</th>
+			<th><%= @order.created_at.strftime('%Y年%m月%d日 %H時%M分%S秒') %></th>
+		</tr>
+		<tr>
+			<th>配送先</th>
+			<th>
+				<div>
+				  <%= @order.post_code %>
+			    </div>
+			    <div>
+				  <%= @order.address %>
+			    </div>
+			    <div>
+				  <%= @order.name %>
+			    </div>
+			</th>
+		</tr>
+		<tr>
+			<th>支払方法</th>
+			<th><%= @order.payment_method %></th>
+		</tr>
+		<tr>
+			<th>ステータス</th>
+			<th><%= @order.status %></th>
+		</tr>
+	</thead>
+</table>
+
+
+<!-- デザインによっては↓いらんかも -->
+<% sum_all = 0 %>
+<% @order.order_products.each do |order_product| %>
+<% sum_product = order_product.tax_include_price.to_i * order_product.quantity %>
+<% sum_all += sum_product %>
+<% end %>
+<!-- ーーーーーーーーーーーーーーーーーーーーー -->
+<strong>請求情報</strong>
+<table>
+	<thead>
+		<tr>
+			<th>商品合計</th>
+			<th><%= sum_all.to_s(:delimited) %></th>
+		</tr>
+		<tr>
+			<th>配送料</th>
+			<th><%= @order.shipping_cost %></th>
+		</tr>
+		<tr>
+			<th><strong>ご請求</strong></th>
+			<th><%= @order.total_payment %></th>
+		</tr>
+	</thead>
+</table>
+
+
+<strong>注文内容</strong>
+<table>
+	<thead>
+		<tr>
+			<th>商品</th>
+			<th>単価（税込）</th>
+			<th>個数</th>
+			<th>小計</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% sum_all = 0 %>
+		<% @order.order_products.each do |order_product| %>
+		  <tr>
+		    <td><%= order_product.product.name %></td>
+		    <td><%= order_product.product.tax_include_price.to_s(:delimited) %></td>
+		    <td><%= order_product.quantity.to_s(:delimited) %></td>
+		    <td>
+		    	<% sum_product = order_product.tax_include_price.to_i * order_product.quantity %>
+				<%= sum_product.to_s(:delimited) %>
+        		<% sum_all += sum_product %></td>
+		  </tr>
+		<% end %>
+	</tbody>
+</table>

@@ -9,12 +9,12 @@ class Product < ApplicationRecord
 
 	has_many :cart_items
 	has_many :customers, through: :cart_items
-	has_many :order_items
+	has_many :order_products
 	has_many :orders, through: :order_items
 	belongs_to :genre
 
 	def tax_include_price
-		(price*1.1).round
+		(price*1.08).round
 	end
 
 end

@@ -4,7 +4,10 @@ class Customers::CartItemsController < ApplicationController
   def create
     @cart_item = current_customer.cart_items.new(cart_item_params)
     if @cart_item.product.is_active == true
+      # これで販売停止中の商品はカートに入らなくなる。
       @already_cart_item = CartItem.find_by( product_id: @cart_item.product_id, customer_id: current_customer.id )
+      # ここがproduct_idだけだと、何故か他のカートに同じ商品が入ってるときに、そのカートで同じ商品が足されてしまい、
+      # id=1の人のショートケーキが16個とかになってしまっていた。だからcustomer_idも指定してあげる。
       if @already_cart_item.nil?
         @cart_item.save
       else

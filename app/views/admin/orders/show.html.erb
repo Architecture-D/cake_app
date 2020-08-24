@@ -10,7 +10,8 @@
 	</tr>
 	<tr>
 		<td>
-			<%= @order.name %>
+			<%= @order.customer.last_name %>
+			<%= @order.customer.first_name %>
 		</td>
 		<td>
 			<%= @order.address %>
@@ -19,11 +20,12 @@
 			<%= @order.payment_method %>
 		</td>
 		<td>
-			<%= f.select :status, Order.status.keys.to_a %>
+			<%= f.select :status, Order.statuses.keys.to_a %>
 			<%= f.submit '更新' ,class: "btn btn-primary" %>
 		</td>
 	</tr>
 </table>
+<% end %>
 
 <table class="table">
 	<tr>
@@ -34,38 +36,53 @@
 		<th>製作ステータス</th>
 		<th></th>
 	</tr>
-	<%= f.fields_for :order_product do |o| %>
+	<% sum_all = 0 %>
+	<!-- 注文に紐づいている注文商品 -->
+	<% @product.each do |p| %>
+	<!-- 上のform_forとは別で処理（飛ばすURLが違うから） -->
+	<%= form_for(p, url:admin_order_detail_path(p),method: :patch) do |f| %>
 	<tr>
-		<td><%= o.object.product.name %></td>
-		<td><%= addTax(o.object.product.price) %>円</td>
-		<td><%= o.object.quantity %></td>
-		<td><%= totalPrice(addTax(o.object.product.price),o.object.quantity) %></td>
 		<td>
-			<%= i.select :make_status, OrderProduct.make_status.keys.to_a %>
+			<%#= @order.order_products.products.name %>
+			<%= p.product.name %>
 		</td>
 		<td>
-			<%= f.submit "更新", class: "btn btn-primary" %>
+			<%= (p.product.tax_include_price).to_s(:delimited) %>
 		</td>
+		<td>
+			<%= p.quantity %>
+		</td>
+		<td>
+			<% sum_product = (p.product.tax_include_price*p.quantity).to_i %>
+			¥<%= sum_product.to_s(:delimited) %>
+			<% sum_all += sum_product %>
+		</td>
+		<td>
+			<%= f.select :make_status, OrderProduct.make_statuses.keys.to_a %>
+			<%= f.submit '更新',class: "btn btn-primary" %>
+		</td>
+		<td></td>
 	</tr>
 </table>
+<% end %>
+<% end %>
 
-
-<table class="table">
+<div class="pull-right">
+<table>
 	<tr>
 		<th>商品合計</th>
-		<td><%= addTax(@items.sum(:price)) %></td>
+		<td>¥<%= sum_all.to_s(:delimited) %></td>
 	</tr>
 	<tr>
 		<th>送料</th>
-		<td><%= @order.shipping_cost %></td>
+		<td>¥<%= @order.shipping_cost %></td>
 	</tr>
 	<tr>
-		<th>請求額合計</th>
-		<td><%= addTax(@items.sum(:price)) + @order.shipping_cost %></td>
+		<th>請求金額合計</th>
+		<td>¥<%= (sum_all + @order.shipping_cost).to_s(:delimited) %></td>
 	</tr>
 </table>
-
-<% end %>
+</div>
 
 
 

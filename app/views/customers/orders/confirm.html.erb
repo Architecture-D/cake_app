@@ -7,34 +7,63 @@
 			<th>数量</th>
 			<th>小計</th>
 		</tr>
-	</thead>
-	<tbody>
+		<% sum_all = 0 %>
+	    <% @cart_items.each do |item| %>
 		<tr>
 			<td>
-				<%= attachment_image_tag(@book.user, :profile_image, :fill, 100, 100, fallback: "no-image-mini.jpg") %>
+				<%= attachment_image_tag item.product, :image, :fill, 50, 50 %>
+				<%= item.product.name %>
 			</td>
-			<td>単価</td>
-			<td>数量</td>
-			<td>小計</td>
+			<td>
+				¥<%= item.product.tax_include_price %>
+			</td>
+			<td>
+				<%= item.quantity %>
+			</td>
+			<td>
+				¥<%= sum_product = item.product.tax_include_price.to_i * item.quantity %>円
+        		<% sum_all += sum_product %>
+			</td>
 		</tr>
-	</tbody>
+		<% end %>
+	</thead>
 </table>
 <table>
 	<thead>
 		<tr>
 			<th>送料</th>
-			<th>800円</th>
+			<th><%= @order.shipping_cost %></th>
 		</tr>
 		<tr>
 			<th>商品合計</th>
-			<th>800円</th>
+			<th>¥<%= sum_all %>円</th>
 		</tr>
 		<tr>
 			<th>請求金額</th>
-			<th>800円</th>
+			<th>
+			   <% @order.total_payment = sum_all + @order.shipping_cost.to_i %>
+               <%= @order.total_payment.to_i %>円
+            </th>
 		</tr>
 	</thead>
 </table>
 <strong>支払方法</strong>
-クレジットカード
-<strong>お届け先</stro
+<%= @order.payment_method %>
+<strong>お届け先</strong>
+<%= @order.post_code %>
+<%= @order.address %>
+<%= @order.name %>
+<%= form_with(model: @order, local: true) do |f| %>
+  <%= f.hidden_field :customer_id, value: current_customer.id %>
+  <%= f.hidden_field :post_code, value: @order.post_code %>
+  <%= f.hidden_field :address, value: @order.address %>
+  <%= f.hidden_field :name, value: @order.name %>
+  <%= f.hidden_field :total_payment, value: @order.total_payment.to_i %>
+
+<!--   <%= f.hidden_field :customer_id, :value => current_customer.id %>
+  <%= f.hidden_field :post_code, :value => "#{@order.post_code}"  %>
+  <%= f.hidden_field :address, :value => "#{@order.address}" %>
+  <%= f.hidden_field :name, :value => "#{@order.name}"  %>
+  <%= f.hidden_field :total_payment, :value => @order.total_payment.to_i %> -->
+  <%= f.submit "購入を確定する", class: "btn btn-danger btn-lg" %>
+<% end %>

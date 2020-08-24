@@ -3,13 +3,15 @@ class Customers::CartItemsController < ApplicationController
   # 完成形
   def create
     @cart_item = current_customer.cart_items.new(cart_item_params)
-    @already_cart_item = CartItem.find_by( product_id: @cart_item.product_id )
-    if @already_cart_item.nil?
-      @cart_item.save
-    else
-      @already_cart_item.increment!(:quantity, params[:cart_item][:quantity].to_i)
+    if @cart_item.product.is_active == true
+      @already_cart_item = CartItem.find_by( product_id: @cart_item.product_id, customer_id: current_customer.id )
+      if @already_cart_item.nil?
+        @cart_item.save
+      else
+        @already_cart_item.increment!(:quantity, params[:cart_item][:quantity].to_i)
       # @already_cart_item.quantity += params[:cart_item][:quantity].to_i
       # @already_cart_item.save
+      end
     end
     redirect_to cart_items_path
   end

@@ -10,15 +10,28 @@
 	<% @orders.each do |order| %>
 	<tr>
 		<td>
-			<%= link_to admin_order_path(order) %>
+			<%= link_to admin_order_path(order) do %>
 			<%= order.created_at %>
+			<% end %>
 		</td>
 		<td>
-			<%= order.フルネーム %>
+			<%= order.customer.last_name %>
+			<%= order.customer.first_name %>
 		</td>
-		<td>
-			<%= order.quantity %>
-		</td>
+		<% sum_all = 0 %>
+		<% order.order_products.each do |o| %>
+			<%#= o.quantity %>
+			<%#= order.order_products.quantity %>
+			<!-- これだと、どのquantityかわからん -->
+
+			<%# sum_product = o.quantity %>
+			<%# sum_all += sum_product %>
+			<%#= sum_all %>
+			<!-- これで今4 11とか出てきてしまう。
+			11だけ出てきて欲しい。どうしたら良いか。 -->
+			<% sum_all += o.quantity %>
+		<% end %>
+		<td><%= sum_all %></td>
 		<td>
 			<%= order.status %>
 		</td>

@@ -1,2 +1,76 @@
-<h1>Admin::Customers#edit</h1>
-<p>Find me in app/views/admin/customers/edit.html.erb</p>
+<!-- タイトル -->
+<h3 class="admin-title">
+ <%= @customer.last_name %> <%= @customer.first_name %>さんの会員情報編集
+</h3><br>
+
+
+<!-- 編集フォーム部分 -->
+
+<%= form_for(@customer, url: admin_customer_path) do |f| %>
+
+	<!-- エラーメッセージ表示-->
+	<% if @customer.errors.any? %>
+		<div>
+			<h3><%= @customer.errors.count %>error prohibited this obj from being saved:</h3>
+			<ul>
+				<% @customer.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+<div class="row">
+ <div class="col-xs-2">
+
+	<p>会員ID：<span><%= @customer.id %></span></p>
+	<div class="customer-text"><p>名前</p><p>フリガナ</p><p>郵便番号(ハイフンなし)</p><p>住所</p><p>電話番号(ハイフンなし)</p><p>メールアドレス</p><p>会員ステータス</p></div>
+ </div>
+ <div class="col-xs-5"><br><br>
+	<!-- フォーム部分 -->
+	<div>
+		<%= f.text_field :last_name %>
+		<%= f.text_field :first_name %>
+	</div><br>
+
+	<div>
+		<%= f.text_field :last_name_kana %>
+		<%= f.text_field :first_name_kana %>
+	</div><br>
+
+	<div>
+		<%= f.text_field :post_code %>
+	</div><br>
+
+	<div>
+		<%= f.text_field :address, :size=>"42"%>
+	</div><br>
+
+	<div>
+		<%= f.text_field :phone_number %>
+	</div><br>
+
+	<div>
+		<%= f.text_field :email , :size=>"42"%>
+	</div><br>
+
+	<!-- ラジオボタン -->
+	<div>
+		<label>
+			<%= f.radio_button :is_deleted, false %>
+			有効
+		</label>
+		<label>
+			<%= f.radio_button :is_deleted, true %>
+			無効
+		</label>
+	</div>
+ </div>
+</div>
+	<!-- サブミットボタン -->
+	<div>
+		<%= f.submit "変更を保存する", class:"btn btn-primary" %>
+	</div>
+
+
+<% end %>
+

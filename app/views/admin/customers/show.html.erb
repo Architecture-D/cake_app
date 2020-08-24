@@ -1,2 +1,77 @@
-<h1>Admin::Customers#show</h1>
-<p>Find me in app/views/admin/customers/show.html.erb</p>
+
+<!-- タイトル -->
+<h3 class="admin-title">
+	<%= @customer.last_name %> <%= @customer.first_name %>さんの会員詳細
+</h3><br>
+
+<!-- 登録情報一覧 -->
+<!-- customer情報の表示 -->
+<div class="row">
+ <div class="col-xs-6">
+<table class="table table-striped">
+	<tr>
+		<th>顧客ID</th>
+		<td>
+			<span><%= @customer.id %></span>
+
+			<!-- 有効会員／無効会員で色変える感じ？ -->
+			<% if @customer.is_deleted != true %>
+				<span class="Yuko">有効会員</span>
+			<% else %>
+				<span class="Muko">無効会員</span>
+			<% end %>
+		</td>
+	</tr>
+	<tr>
+		<th>氏名</th>
+		<td>
+			<span><%= @customer.last_name %></span>
+			<span><%= @customer.first_name %></span>
+		</td>
+	</tr>
+	<tr>
+		<th>カナ</th>
+		<td>
+			<span><%= @customer.last_name_kana %></span>
+			<span><%= @customer.first_name_kana %></span>
+		</td>
+	</tr>
+	<tr>
+		<th>郵便番号</th>
+		<td>
+			<span><%= @customer.post_code %></span>
+		</td>
+	</tr>
+	<tr>
+		<th>住所</th>
+		<td>
+			<span><%= @customer.address %></span>
+		</td>
+	</tr>
+	<tr>
+		<th>電話番号</th>
+		<td>
+			<span><%= @customer.phone_number %></span>
+		</td>
+	</tr>
+	<tr>
+		<th>メールアドレス</th>
+		<td>
+			<span><%= @customer.email %></span>
+		</td>
+	</tr>
+</table>
+
+<div>
+	<!-- カスタマー情報変更画面へのリンク部分 -->
+	<%= link_to edit_admin_customer_path do %>
+		<button class="btn btn-primary">編集する</button>
+	<% end %>
+
+	<!-- 注文履歴一覧へのリンク部分 -->
+	<%= link_to admin_orders_path do %>
+		<button class="btn btn-success">注文履歴一覧を見る</button>
+	<% end %>
+</div>
+
+</div></div>

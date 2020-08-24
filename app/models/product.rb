@@ -14,7 +14,7 @@ class Product < ApplicationRecord
 	belongs_to :genre
 
 	def tax_include_price
-		(price*1.1).round
+		(price*1.08).round
 	end
 
 end

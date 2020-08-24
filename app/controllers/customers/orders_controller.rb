@@ -101,7 +101,7 @@ class Customers::OrdersController < ApplicationController
         p "--------------------h"
         order_product.save
         p "--------------------i"
-        # cart_item.destroy
+        cart_item.destroy
       end
       render :thank
     else

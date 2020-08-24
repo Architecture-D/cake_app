@@ -19,8 +19,9 @@ class Customers::ProductsController < ApplicationController
       #@products = Product.where(genre_id: params[:product][:genre_id],is_active: true)
 
   def index
+    @genres = Genre.where(is_active: true)
     if params[:genre_id].present?
-      @products = Product.where('name LIKE ?', "%#{params[:name]}%")
+      @products = Product.where(genre_id: params[:genre_id],is_active: true)
     else
       @products = Product.joins(:genre).where(is_active: true, genres: { is_active: "true"})
     end

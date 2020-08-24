@@ -11,6 +11,12 @@
   <%= f.submit :search %>
 <% end %>
 
+<% @genres.each do |genre| %>
+<div>
+  <%= link_to genre.name, products_path(genre_id: genre.id) %>
+</div>
+<% end %>
+
   </div>
  </div>
  <div class="row">

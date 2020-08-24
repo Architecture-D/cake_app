@@ -1,24 +1,25 @@
-Customers＃show 画面
+<div class="row">
+ <div class="col-xs-1">
+ </div>
+ <div class="col-xs-7">
 
-<!-- ヘッダー記載箇所イメージ -->
-ヘッダー部分
+<br>
+<h3><i class="fas fa-user"></i>マイページ</h3><br>
 
-<!-- タイトル -->
-マイページ
 
-<!-- 登録情報へのリンク部分 -->
 <div>
-	<span>登録情報</span>
+	<span class="mypage-span">登録情報</span>
 	<%= link_to edit_info_customers_path do %>
-		<button>編集する</button>　
+		<button class="btn btn-primary">編集する</button>
 	<% end %>
 	<%= link_to edit_customer_registration_path do %>
-		<button>パスワードを変更する</button>　
+		<button class="btn btn-primary">パスワードを変更する</button>
 	<% end %>
-</div>
+</div><br>
 
 <!-- customer情報の表示 -->
-<table>
+
+<table class="table table-striped">
 	<tr>
 		<th>氏名</th>
 		<td>
@@ -57,26 +58,24 @@ Customers＃show 画面
 			<span><%= @customer.email %></span>
 		</td>
 	</tr>
-	<tr>
-	    <th>パスワード</th>
-		<td>
-			<span><%= @customer.password %></span>
-		</td>
-	</tr>
 </table>
+
 
 <!-- 配送先一覧画面へのリンク部分 -->
 <div>
-	<span>配送先</span>
+	<span class="mypage-span-a">配送先</span>
 	<%= link_to destinations_path do %>
-		<button>一覧を見る</button>　
+		<button class="btn btn-success">一覧を見る</button>
 	<% end %>
-</div>
+</div><br>
 
 <!-- 注文履歴画面へのリンク部分 -->
 <div>
-	<span>注文履歴</span>
+	<span class="mypage-span">注文履歴</span>
 	<%= link_to orders_path do %>
-		<button>一覧を見る</button>
+		<button class="btn btn-warning">一覧を見る</button>
 	<% end %>
+</div>
+
+ </div>
 </div>

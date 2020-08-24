@@ -1,0 +1,18 @@
+    <div>
+      <%= f.radio_button :add, 3 %>
+      <%= f.label :"新しいお届け先" %>
+      <%= f.fields_for :new_add do |n| %>
+        <div>
+          <%= n.label :"郵便番号(ハイフンなし)" %>
+          <%= n.text_field :post_code %>
+        </div>
+        <div>
+          <%= n.label :"住所" %>
+          <%= n.text_field :address %>
+        </div>
+        <div>
+          <%= n.label :"宛名" %>
+          <%= n.text_field :name %>
+        </div>
+      <% end %>
+    </div>

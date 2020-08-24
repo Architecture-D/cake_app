@@ -6,18 +6,19 @@
   </div>
   <div class="col-xs-10">
 
-  	<% @genres.each do |genre| %>
-  	<%= genre.name %>
-  	<% end %>
+<%= form_with model:@product, url: products_path, method: :get, local: true do |f| %>
+  <%= f.collection_select :genre_id, Genre.where(is_active: "true"), :id, :name,disabled: true, include_blank: "選択して下さい" %>
+  <%= f.submit :search %>
+<% end %>
 
   </div>
  </div>
  <div class="row">
   	<h2>商品一覧</h2>
   	 <% @products.each do |product| %>
-  	 　<div class="col-xs-4">
+  	 　<div class="col-xs-3">
         <%= link_to product_path(product) do %>
-  	    <%= attachment_image_tag product, :image, :fill, 380, 380%>
+  	    <%= attachment_image_tag product, :image, :fill, 280, 280, class: 'product-image'%>
         <% end %>
         <%= product.name %><br>
        ¥<%= product.price %>
@@ -27,3 +28,4 @@
 
 
 </div>
+

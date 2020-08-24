@@ -1,6 +1,7 @@
 </div>
 	<div class="top">
 		<div class="cake-image">
+		<%= video_tag("/videos/cake.video.mp4", autoplay: :true, muted: :true, class: 'video-content') %>
 		</div>
 		<br><br>
  				 <div class="home-text"><br><br>
@@ -15,7 +16,7 @@
 
                 <% @products.last(4).each do |product| %>
                  <div class=col-xs-3>
-                  <%= attachment_image_tag product, :image, :fill, 280, 280%>
+                  <%= attachment_image_tag product, :image, :fill, 280, 280, class: 'product-image'%>
                   <%= product.name %><br>
                   ¥<%= product.price %>
                  </div>

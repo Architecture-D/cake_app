@@ -22,6 +22,7 @@ class Customers::ProductsController < ApplicationController
     @genres = Genre.where(is_active: true)
     if params[:genre_id].present?
       @products = Product.where(genre_id: params[:genre_id],is_active: true)
+      @product = Product.find_by(genre_id: params[:genre_id])
     else
       @products = Product.joins(:genre).where(is_active: true, genres: { is_active: "true"})
     end

@@ -1,7 +1,23 @@
-<h2>注文情報入力</h2>
-  <strong>支払方法</strong>
+<% if @order.errors.any? %>
+   <div id=“error_explanation”>
+    <h3><%= @order.errors.count %>error prohibited this obj from being saved:</h3>
+    <ul>
+     <% @order.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+     <% end %>
+    </ul>
+   </div>
+<% end %>
+
+
+<h2>注文情報入力</h2><br>
+  <strong class="strong">支払方法</strong>
    <%= form_with model: @order, url: confirm_orders_path, local: true do |f| %>
-    <div>
+
+   <div class="row">
+    <div class="col-xs-1">
+    </div>
+    <div class="col-xs-11">
       <div>
         <%= f.radio_button :payment_method, :'クレジットカード', checked: true %>
         <%= f.label :"クレジットカード" %>
@@ -9,38 +25,58 @@
       <div>
         <%= f.radio_button :payment_method, :'銀行振込'%>
         <%= f.label :"銀行振込" %>
-      </div>
-      <strong>お届け先</strong>
+    </div>
+    </div>
+   </div>
+
+      <strong class="strong">お届け先</strong>
+   <div class="row">
+    <div class="col-xs-1">
+    </div>
+    <div class="col-xs-11">
+      <div>
+
       <div>
       <%= f.radio_button :add, 1, checked: true  %>
-      <%= f.label :"ご自身の住所" %>
-      <%= @customer.post_code %>
-      <%= @customer.address %>
-      <%= @customer.first_name %>
+      <%= f.label :"ご自身の住所" %><br>
+      <div class="margin-left-block">
+      <%= @customer.post_code %><%= @customer.address %><br>
+      <%= @customer.last_name %> <%= @customer.first_name %>
+      </div>
     </div>
     <div>
       <%= f.radio_button :add, 2 %>
-      <%= f.label :"登録済み住所から選択" %>
-      <%= f.collection_select :address, @customer.destinations, :id, :order_address %>
+      <%= f.label :"登録済み住所から選択" %><br>
+      <div class="margin-left-block">
+        <%= f.collection_select :address, @customer.destinations, :id, :order_address%>
+      </div>
     </div>
-    <div>
       <%= f.radio_button :add, 3 %>
       <%= f.label :"新しいお届け先" %>
       <%= f.fields_for :new_add do |n| %>
+     <div class="margin-left-block">
         <div>
-          <%= n.label :"郵便番号（ハイフンなし）" %>
+          <span>郵便番号(ハイフンなし)</span>
           <%= n.text_field :post_code %>
-        </div>
+        </div><br>
         <div>
-          <%= n.label :"住所" %>
-          <%= n.text_field :address %>
-        </div>
+          <span class="second-child">住所</span>
+          <%= n.text_field :address, :size=>"50"%>
+        </div><br>
         <div>
-          <%= n.label :"宛名" %>
+          <span class="second-child">宛名</span>
           <%= n.text_field :name %>
         </div>
       <% end %>
-    </div>
-    </div>
-  <%= f.submit "確認画面へ進む",class: "btn btn-primary" %>
+    </div><br>
+
+</div></div>
+
+<div class="row">
+  <div class="col-xs-4">
+  </div>
+  <div class="col-xs-3">
+  <%= f.submit "確認画面へ進む",class: "btn btn-primary"%>
+  </div>
+</div>
 <% end %>

@@ -20,7 +20,13 @@
   </div>
  </div>
  <div class="row">
-  	<h2>商品一覧</h2>
+  	<% if params[:genre_id].present? %>
+      <h2><%= @product.genre.name %>一覧</h2>
+      <h4>(全<%= @products.count %>件)</h4>
+    <% else %>
+      <h2>商品一覧</h2>
+      <h4>(全<%= @products.count %>件)</h4>
+    <% end %>
   	 <% @products.each do |product| %>
   	 　<div class="col-xs-3">
         <%= link_to product_path(product) do %>

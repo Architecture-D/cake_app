@@ -6,10 +6,14 @@
   </div>
   <div class="col-xs-10">
 
-<%= form_with model:@product, url: products_path, method: :get, local: true do |f| %>
-  <%= f.collection_select :genre_id, Genre.where(is_active: "true"), :id, :name,disabled: true, include_blank: "選択して下さい" %>
-  <%= f.submit :search %>
+
+
+<% @genres.each do |genre| %>
+<div>
+  <%= link_to genre.name, products_path(genre_id: genre.id) %>
+</div>
 <% end %>
+
 
   </div>
  </div>

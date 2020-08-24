@@ -1,62 +1,77 @@
-<h2>注文情報確認</h2>
-<table>
+
+<h2>注文情報確認</h2><br>
+
+<div class="row">
+ <div class="col-xs-9">
+
+<table class="table">
 	<thead>
-		<tr>
+		<tr class="info">
 			<th>商品名</th>
-			<th>単価（税込）</th>
+			<th>単価(税込)</th>
 			<th>数量</th>
 			<th>小計</th>
 		</tr>
 		<% sum_all = 0 %>
 	    <% @cart_items.each do |item| %>
-		<tr>
-			<td>
+		<tr class="active">
+			<td class="col-xs-5">
 				<%= attachment_image_tag item.product, :image, :fill, 50, 50 %>
 				<%= item.product.name %>
 			</td>
-			<td>
-				<%= item.product.tax_include_price.to_s(:delimited) %>
+			<td class="col-xs-2">
+				¥<%= item.product.tax_include_price.to_s(:delimited) %>
 			</td>
-			<td>
-				<%= item.quantity.to_s(:delimited) %>
+			<td class="col-xs-3">
+				<%= item.quantity.to_s(:delimited) %>個
 			</td>
-			<td>
+			<td class="col-xs-2">
 				<% sum_product = item.product.tax_include_price.to_i * item.quantity %>
-				<%= sum_product.to_s(:delimited) %>
+				¥<%= sum_product.to_s(:delimited) %>
         		<% sum_all += sum_product %>
 			</td>
 		</tr>
 		<% end %>
 	</thead>
 </table>
-<table>
+ </div>
+
+ <div class="col-xs-3">
+<div class="confirm-table">
+<table class="table">
 	<thead>
-		<tr>
+		<tr class="active">
 			<th>送料</th>
-			<th><%= @order.shipping_cost.to_s(:delimited) %></th>
+			<th>¥<%= @order.shipping_cost.to_s(:delimited) %></th>
 		</tr>
-		<tr>
+		<tr class="active">
 			<th>商品合計</th>
-			<th><%= sum_all.to_s(:delimited) %></th>
+			<th>¥<%= sum_all.to_s(:delimited) %></th>
 		</tr>
-		<tr>
+		<tr class="info">
 			<th>請求金額</th>
 			<th>
 			   <% @order.total_payment = sum_all + @order.shipping_cost.to_i %>
-               <%= @order.total_payment.to_s(:delimited) %>円
+               ¥<%= @order.total_payment.to_s(:delimited) %>
             </th>
 		</tr>
 	</thead>
 </table>
-<div>
+</div>
+ </div>
+</div>
+
+<div class="row">
+ <div class="col-xs-10">
+<div class="confirm-text">
 	<strong>支払方法</strong>
 	<%= @order.payment_method %>
-</div>
-<div>
+</div><br>
+<div class="confirm-text">
 	<strong>お届け先</strong>
 	<%= @order.post_code %>
-	<%= @order.address %>
-	<%= @order.name %>
+	<%= @order.address %>　<!-- ←あえて空白入れてるので消さないでください -->
+	<%= @order.name %> 様
 </div>
 <%= form_with(model: @order, local: true) do |f| %>
   <%= f.hidden_field :customer_id, value: current_customer.id %>
@@ -64,5 +79,10 @@
   <%= f.hidden_field :address, value: @order.address %>
   <%= f.hidden_field :name, value: @order.name %>
   <%= f.hidden_field :total_payment, value: @order.total_payment.to_i %>
+ </div>
+ <div class="col-xs-2">
   <%= f.submit "購入を確定する", class: "btn btn-danger btn-lg" %>
+ </div>
 <% end %>
+
+</div>

@@ -11,7 +11,7 @@
 	<tr>
 		<td>
 			<%= link_to admin_order_path(order) do %>
-			<%= order.created_at %>
+			<%= order.created_at.strftime('%Y年%m月%d日 %H時%M分%S秒') %>
 			<% end %>
 		</td>
 		<td>

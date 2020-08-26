@@ -27,6 +27,12 @@
 </table>
 <% end %>
 
+	<% sum_all = 0 %>
+	<!-- 注文に紐づいている注文商品 -->
+	<% @product.each_with_index  do |p,i| %>
+	<!-- 上のform_forとは別で処理（飛ばすURLが違うから） -->
+	<%= form_for(p, url:admin_order_product_path(p),method: :patch) do |f| %>
+<% if i == 0 %>
 <table class="table">
 	<tr>
 		<th>商品名</th>
@@ -36,11 +42,7 @@
 		<th>製作ステータス</th>
 		<th></th>
 	</tr>
-	<% sum_all = 0 %>
-	<!-- 注文に紐づいている注文商品 -->
-	<% @product.each do |p| %>
-	<!-- 上のform_forとは別で処理（飛ばすURLが違うから） -->
-	<%= form_for(p, url:admin_order_detail_path(p),method: :patch) do |f| %>
+<% end %>
 	<tr>
 		<td>
 			<%#= @order.order_products.products.name %>

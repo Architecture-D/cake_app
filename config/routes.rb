@@ -40,7 +40,7 @@ Rails.application.routes.draw do
     resources :customers,only: [:show,:index,:edit,:update]
     resources :genres,only: [:index,:create,:edit,:update]
     resources :products,only: [:index,:new,:create,:edit,:update,:show]
-    resources :order_details,only: [:update]
+    resources :order_products,only: [:update]
     resources :orders,only: [:index,:show,:update]
   end
 

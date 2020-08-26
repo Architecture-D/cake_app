@@ -36,10 +36,8 @@
 <div class="col-xs-10">
 
 	<% sum_all = 0 %>
-	<!-- 注文に紐づいている注文商品 -->
-	<% @product.each_with_index do |p, i| %><!-- each do の１回目だけ区別する為 -->
-	<!-- 上のform_forとは別で処理（飛ばすURLが違うから） -->
-	<%= form_for(p, url:admin_order_detail_path(p),method: :patch) do |f| %>
+	<% @product.each_with_index do |p, i| %>
+	<%= form_for(p, url:admin_order_product_path(p),method: :patch) do |f| %>
 
 <table class="table">
 <% if i == 0 %><!-- each do の１回目だけここの処理する(2回目以降はtableには入ってるけどthはいらないよみたいな) -->
@@ -51,11 +49,10 @@
 		<th class="col-xs-3">製作ステータス</th>
 
 	</tr>
-<% end %>       <!-- --------->
+<% end %>
 
 	<tr>
 		<td class="col-xs-3">
-			<%#= @order.order_products.products.name %>
 			<%= p.product.name %>
 		</td>
 		<td class="col-xs-2">

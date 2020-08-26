@@ -1,8 +1,19 @@
+<!-- バリデーション チェック -->
+<% if @genre.errors.any? %>
+      <div id="error_explanation">
+        <h3><%= @genre.errors.count %>個のエラーがあります。</h3>
+        <ul>
+          <% @genre.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+<% end %>
 <div class="row">
  <div class="col-xs-6">
 <h3 class="admin-title">ジャンル一覧・追加</h3><br>
 
-<%= form_with model:@genre, url: admin_genres_path, loclal:true do |f| %>
+<%= form_with model:@genre, url: admin_genres_path, local:true do |f| %>
   <%= f.label :"ジャンル" %>
   <%= f.text_field :name %>
   <%= f.radio_button :is_active, :true, checked:true %>

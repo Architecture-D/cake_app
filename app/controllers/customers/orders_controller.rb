@@ -65,7 +65,7 @@ class Customers::OrdersController < ApplicationController
 
   def index
     @customer = Customer.find(current_customer.id)
-    @orders = @customer.orders
+    @orders = @customer.orders.page(params[:page]).reverse_order
   end
 
   def show

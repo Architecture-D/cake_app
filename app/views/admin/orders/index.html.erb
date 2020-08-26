@@ -1,7 +1,12 @@
-<h3>注文履歴一覧</h3>
+<div class="row">
+ <div class="col-xs-1">
+ </div>
 
-<table class="table">
-	<tr>
+<div class="col-xs-10">
+ <h3 class="admin-title">注文履歴一覧</h3><br>
+
+<table class="table table-striped">
+	<tr class="warning">
 		<th>購入日時</th>
 		<th>購入者</th>
 		<th>注文個数</th>
@@ -11,7 +16,8 @@
 	<tr>
 		<td>
 			<%= link_to admin_order_path(order) do %>
-			<%= order.created_at.strftime('%Y年%m月%d日 %H時%M分%S秒') %>
+
+			<%= order.created_at.strftime('%Y/%m/%d %H:%M') %>
 			<% end %>
 		</td>
 		<td>
@@ -20,23 +26,17 @@
 		</td>
 		<% sum_all = 0 %>
 		<% order.order_products.each do |o| %>
-			<%#= o.quantity %>
-			<%#= order.order_products.quantity %>
-			<!-- これだと、どのquantityかわからん -->
 
-			<%# sum_product = o.quantity %>
-			<%# sum_all += sum_product %>
-			<!-- この上の2行だとa=bと定義してから、sum_allはaを足し合わせた数です。という意味になる。普通にsum_allはbを足し合わせた数です。としたほうが1行でいいし簡潔。 -->
-			<%#= sum_all %>
-			<!-- これで今4 11とか出てきてしまう。
-			11だけ出てきて欲しい。どうしたら良いか。 -->
 			<% sum_all += o.quantity %>
 		<% end %>
 		<td><%= sum_all %></td>
-		<!-- このsum＿allがeach分の中に入ってしまってたため、4、11とかが出てきてしまっていた。cartitemの時みたいにeach分の外に出して記述してやる。 -->
 		<td>
 			<%= order.status %>
 		</td>
 	</tr>
 	<% end %>
+
 </table>
+<div class='admin-paginate'><%= paginate @orders %></div>
+</div>
+</div>

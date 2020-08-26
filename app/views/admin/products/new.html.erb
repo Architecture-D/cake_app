@@ -2,7 +2,7 @@
 <!-- バリデーション チェック -->
 <% if @product.errors.any? %>
       <div id="error_explanation">
-        <h3><%= @product.errors.count %>error prohibited this obj from being saved:</h3>
+        <h3><%= @product.errors.count %>個のエラーがあります。</h3>
         <ul>
           <% @product.errors.full_messages.each do |message| %>
             <li><%= message %></li>
@@ -10,8 +10,9 @@
         </ul>
       </div>
 <% end %>
+
 <h3 class="admin-title">商品新規登録</h3><br>
-  <%= form_with model:@product, url: admin_products_path, loclal:true do |f| %>
+  <%= form_with model:@product, url: admin_products_path, local:true do |f| %>
  <!--  画像投稿時のプレビュー機能はチャレンジ項目実装は時間があれば -->
 	  <%= f.attachment_field :image %><br>
 	  <div class="row">

@@ -1,10 +1,8 @@
-
-<div class="row">
-<h3 class="admin-title">注文履歴詳細</h3><br>
+<h3>注文履歴詳細</h3>
 
 <%= form_for(@order, url:admin_order_path,method: :patch) do |f| %>
 <table class="table">
-	<tr class="warning">
+	<tr>
 		<th>購入者</th>
 		<th>配送先</th>
 		<th>支払方法</th>
@@ -28,63 +26,49 @@
 	</tr>
 </table>
 <% end %>
-</div>
-<div class="row">
-<div class="col-xs-2">
-</div>
-
-<div class="col-xs-10">
-
-	<% sum_all = 0 %>
-	<!-- 注文に紐づいている注文商品 -->
-	<% @product.each_with_index do |p, i| %><!-- each do の１回目だけ区別する為 -->
-	<!-- 上のform_forとは別で処理（飛ばすURLが違うから） -->
-	<%= form_for(p, url:admin_order_detail_path(p),method: :patch) do |f| %>
 
 <table class="table">
-<% if i == 0 %><!-- each do の１回目だけここの処理する(2回目以降はtableには入ってるけどthはいらないよみたいな) -->
-	<tr class="warning">
-		<th class="col-xs-3">商品名</th>
-		<th class="col-xs-2">単価（税込）</th>
-		<th class="col-xs-2">数量</th>
-		<th class="col-xs-2">小計</th>
-		<th class="col-xs-3">製作ステータス</th>
-
-	</tr>
-<% end %>       <!-- --------->
-
 	<tr>
-		<td class="col-xs-3">
+		<th>商品名</th>
+		<th>単価（税込）</th>
+		<th>数量</th>
+		<th>小計</th>
+		<th>製作ステータス</th>
+		<th></th>
+	</tr>
+	<% sum_all = 0 %>
+	<!-- 注文に紐づいている注文商品 -->
+	<% @product.each do |p| %>
+	<!-- 上のform_forとは別で処理（飛ばすURLが違うから） -->
+	<%= form_for(p, url:admin_order_detail_path(p),method: :patch) do |f| %>
+	<tr>
+		<td>
 			<%#= @order.order_products.products.name %>
 			<%= p.product.name %>
 		</td>
-		<td class="col-xs-2">
-			¥<%= (p.product.tax_include_price).to_s(:delimited) %>
+		<td>
+			<%= (p.product.tax_include_price).to_s(:delimited) %>
 		</td>
-		<td class="col-xs-2">
-			<%= p.quantity %>個
+		<td>
+			<%= p.quantity %>
 		</td>
-		<td class="col-xs-2">
+		<td>
 			<% sum_product = (p.product.tax_include_price*p.quantity).to_i %>
 			¥<%= sum_product.to_s(:delimited) %>
 			<% sum_all += sum_product %>
 		</td>
-		<td class="col-xs-3">
+		<td>
 			<%= f.select :make_status, OrderProduct.make_statuses.keys.to_a %>
 			<%= f.submit '更新',class: "btn btn-primary" %>
 		</td>
-
+		<td></td>
 	</tr>
 </table>
 <% end %>
 <% end %>
 
-</div>
-</div>
-
-<div class="row">
 <div class="pull-right">
-<table class="table table-bordered">
+<table>
 	<tr>
 		<th>商品合計</th>
 		<td>¥<%= sum_all.to_s(:delimited) %></td>
@@ -93,11 +77,13 @@
 		<th>送料</th>
 		<td>¥<%= @order.shipping_cost %></td>
 	</tr>
-	<tr class="warning">
+	<tr>
 		<th>請求金額合計</th>
 		<td>¥<%= (sum_all + @order.shipping_cost).to_s(:delimited) %></td>
 	</tr>
 </table>
+</div>
 
-</div>
-</div>
+
+
+

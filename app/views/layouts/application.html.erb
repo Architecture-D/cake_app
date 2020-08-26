@@ -13,11 +13,30 @@
 <header class="navbar navbar-fixed-top">
   <div class="container">
     <div class='row'>
+
+
+<% if customer_signed_in? %>
+<span class="nav-name">
+  <%= current_customer.last_name %> <%= current_customer.first_name %>さん、こんにちは！
+</span>
+<% end %>
+
+
+<% if customer_signed_in? %>
+      <div class='col-xs-offset-5'>
+        <nav class='nav navbar-nav navbar-center' >
+        <h4 class="customer-h4">Nagano Cake</h4>
+        </nav>
+      </div>
+<% else %>
       <div class='col-xs-offset-5'>
         <nav class='nav navbar-nav navbar-center' >
         <h4>Nagano Cake</h4>
         </nav>
       </div>
+<% end %>
+
+
 <!-- 条件分岐で管理人、会員、顧客用のヘッダーを表示 -->
   <% if admin_signed_in? %>
     <nav>
@@ -33,10 +52,10 @@
   <% elsif customer_signed_in? %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to "マイページ", customers_path,class: "Editlink" %></li>
-          <li><%= link_to "商品一覧", products_path,class: "Editlink" %></li>
-          <li><%= link_to "カート", cart_items_path,class: "Editlink" %></li>
-          <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete,class: "Editlink"%></li>
+          <li class="customer-li"><%= link_to "マイページ", customers_path,class: "Editlink" %></li>
+          <li class="customer-li"><%= link_to "商品一覧", products_path,class: "Editlink" %></li>
+          <li class="customer-li"><%= link_to "カート", cart_items_path,class: "Editlink" %></li>
+          <li class="customer-li"><%= link_to "ログアウト", destroy_customer_session_path, method: :delete,class: "Editlink"%></li>
       </ul>
     </nav>
 

@@ -1,6 +1,6 @@
 class Admin::ProductsController < ApplicationController
   def index
-    @products = Product.all
+    @products = Product.all.page(params[:page])
   end
 
   def new

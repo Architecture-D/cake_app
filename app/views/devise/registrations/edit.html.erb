@@ -15,12 +15,12 @@
       <br />
       <em><% @minimum_password_length %></em>
     <% end %>
-  </div>
+  </div><br>
 
   <div class="field">
     <p>新しいパスワード(確認)</p>
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+  </div><br>
 
   <div class="field">
     <p>現在のパスワード</p>
@@ -33,4 +33,4 @@
 <% end %>
 
 
-<%= link_to "Back", :back %>
+<%= link_to "もどる", :back %>

@@ -9,7 +9,6 @@
    </div>
 <% end %>
 
-
 <h2>注文情報入力</h2><br>
   <strong class="strong">支払方法</strong>
    <%= form_with model: @order, url: confirm_orders_path, local: true do |f| %>
@@ -29,6 +28,7 @@
     </div>
    </div>
 
+
       <strong class="strong">お届け先</strong>
    <div class="row">
     <div class="col-xs-1">
@@ -44,6 +44,7 @@
       <%= @customer.last_name %> <%= @customer.first_name %>
       </div>
     </div>
+
     <div>
       <%= f.radio_button :add, 2 %>
       <%= f.label :"登録済み住所から選択" %><br>
@@ -72,11 +73,14 @@
 
 </div></div>
 
-<div class="row">
-  <div class="col-xs-4">
-  </div>
-  <div class="col-xs-3">
-  <%= f.submit "確認画面へ進む",class: "btn btn-primary"%>
-  </div>
-</div></div>
+    </div>
+<div class='col-xs-offset-6'>
+  <%= f.submit "確認画面へ進む",class: "btn btn-primary" %>
+</div>
 <% end %>
+
+
+
+
+
+

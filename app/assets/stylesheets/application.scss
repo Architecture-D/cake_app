@@ -17,20 +17,25 @@
 @import "bootstrap";
 @import 'font-awesome-sprockets';
 @import "font-awesome";
+@import url('https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c');
+@import url('https://fonts.googleapis.com/css?family=Sacramento');
+
 
 *{
-font-family:"sans-serif";
+font-family: 'M PLUS Rounded 1c', sans-serif;
+	position: relative; z-index:1;
+
 }
 
 html {
     height: 100%;
 }
 body {
-    height: 100%;
     padding-top:70px;
     margin: 0;
     background-color:rgba(0,0,0,0.05);
     min-height:800px;
+    padding-bottom: 70px;
 }
 
 header{
@@ -43,9 +48,9 @@ header li{
 }
 header h4{
 	color:black;
-	font-family:cursive;
-	font-size: 30px;
-	margin-left: 0px;
+	font-family: 'Sacramento', cursive;
+	font-size: 43px;
+	margin-left: -20px;
 }
 
 footer{
@@ -103,6 +108,11 @@ footer i{
 	padding-right:450px;
 	padding-top:100px;
 	font-size:20px;
+}
+.Nagano{
+	font-family: 'Sacramento', cursive;
+	font-weight: bold;
+	font-size: 30px;
 }
 .cakeya{
 	float:left;
@@ -178,8 +188,11 @@ height:36px;
 .product-image{
 	border-radius:50%;
 }
+.product-image2{
+	border-radius:50%;
+}
 .product-image:hover{
-    transform: scale(1.2) rotate(9deg);
+    transform: scale(1.1) rotate(9deg);
   transition-duration: 0.5s;
 }
 
@@ -209,7 +222,32 @@ height:36px;
 	font-size:17px;
 }
 
+.order-show h4{
 
+}
+.nav-link{
+	font-size: 18px;
+	margin-right: 15px;
+}
+.new-genre{
+	font-color:red;
+}
+
+.nav-name{
+	height:70px;
+	line-height: 70px;
+}
+.customer-h4{
+	margin-top: -60px;
+}
+.customer-li{
+	margin-top: -69.9px;
+
+}
+
+.admin-paginate{
+text-align: center;
+}
 
 
 

@@ -18,15 +18,15 @@
 </div>
 
 <div class="row">
- <div class="col-xs-2">
 
+<div class="col-xs-2">
 		<div class="destinations-text">
 		<p>郵便番号(ハイフンなし)</p>
 		<p>住所</p>
 		<p>宛名</p>
 	    </div>
- </div>
-  <div class="col-xs-5">
+</div>
+<div class="col-xs-4">
 	<!-- フォーム部分 -->
 <%= form_for(@destination) do |f| %>
 	<div>
@@ -40,12 +40,13 @@
 	<div>
 		<%= f.text_field :name , placeholder: "宛名", autofocus: true%><br>
 	</div>
- </div>
- <div class="col-xs-2">
-	<div><br><br><br><br><br>
-		<%= f.submit "登録する",class:"btn btn-success" %>
+
+
+	<div>
+		<%= f.submit "登録する",class:"btn btn-success",style: "float:right" %>
 	</div>
- </div>
+
+</div>
 </div>
 <% end %>
 

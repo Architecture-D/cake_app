@@ -13,8 +13,4 @@ class Product < ApplicationRecord
 	has_many :orders, through: :order_items
 	belongs_to :genre, optional: true
 
-	def tax_include_price
-		(price*1.08).round
-	end
-
 end

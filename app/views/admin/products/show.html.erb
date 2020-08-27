@@ -1,4 +1,5 @@
-
+<!-- サクセスメッセージ -->
+<%= flash[:notice] %>
 <div class="row">
 <h3 class="admin-title">商品詳細</h3><br>
 </div>
@@ -24,8 +25,7 @@
 		<tr>
 			<th>税込価格（税抜価格）</th>
 			<td>
-				<!-- 消費税計算メゾットは後で考える -->
-				<% (price = @product.price * 1.08 ) %>
+				<% price = @product.tax_include_price %>
 				<%= price.round %>円 (<%= @product.price %>円)
 			</td>
 		</tr>

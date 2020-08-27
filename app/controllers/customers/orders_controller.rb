@@ -86,6 +86,7 @@ class Customers::OrdersController < ApplicationController
     @cart_item = current_customer.cart_items
     redirect_to root_path unless @cart_item.exists?
   end
+
   def set_customer
     @customer = Customer.find(current_customer.id)
   end

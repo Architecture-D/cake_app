@@ -1,7 +1,7 @@
 class Customers::DestinationsController < ApplicationController
   def index
     @destination = Destination.new
-    @destinations = Destination.all
+    @destinations = Destination.where(customer_id: current_customer.id)
   end
 
   def create

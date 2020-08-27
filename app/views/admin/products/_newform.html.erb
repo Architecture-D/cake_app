@@ -1,0 +1,41 @@
+<%= form_with model:@product, url: admin_products_path, local:true do |f| %>
+ <!--  画像投稿時のプレビュー機能はチャレンジ項目実装は時間があれば -->
+  <%= f.attachment_field :image %><br>
+  <div class="row">
+	<div class="col-xs-6">
+	  <table class="table">
+	    <thead>
+		  <tr>
+		    <th><%= f.label :"商品名" %></th>
+		    <th><%= f.text_field :name, placeholder: "商品名" %></th>
+		  </tr>
+		  <tr>
+		    <th><%= f.label :"商品説明" %></th>
+		    <th><%= f.text_area :introduction, :size=>"35", placeholder: "商品説明" %></th>
+		  </tr>
+		  <tr>
+		    <th><%= f.label :"ジャンル"%></th>
+		    <th>
+		  	  <%= f.collection_select :genre_id, Genre.where(is_active: "true"), :id, :name,disabled: true, include_blank: "選択して下さい" %>
+		    </th>
+		  </tr>
+		  <tr>
+		    <th><%= f.label :"税抜価格", placeholder: "価格" %></th>
+		    <th><%= f.text_field :price %>円</th>
+		  </tr>
+		  <tr>
+		    <th><%= f.label :"販売ステータス" %></th>
+		    <th>
+		      <%= f.select :is_active ,[['販売中',true],['売切れ',false]], { include_blank: "選択して下さい", selected: 0 } %>
+		    </th>
+		  </tr>
+	    </thead>
+	  </table>
+	  <% if product.name.nil? %>
+	    <%= f.submit "新規登録", class: "btn btn-success" %>
+	  <% else %>
+	    <%= f.submit "編集する", class: "btn btn-primary" %>
+	  <% end %>
+    </div>
+  </div>
+<% end %>

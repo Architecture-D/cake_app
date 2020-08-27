@@ -1,21 +1,6 @@
 <!-- バリデーション チェック -->
-<% if @genre.errors.any? %>
-      <div id="error_explanation">
-        <h3><%= @genre.errors.count %>個のエラーがあります。</h3>
-        <ul>
-          <% @genre.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-<% end %>
+<%= render 'admin/error', error: @genre %>
+
 <h3 class="admin-title">ジャンル編集</h3>
-<%= form_with model:@genre, url: admin_genre_path, local:true do |f| %>
-  <%= f.label :"ジャンル" %>
-  <%= f.text_field :name %>
-  <%= f.radio_button :is_active, :true %>
-  <%= f.label :"有効" %>
-  <%= f.radio_button :is_active, :false %>
-  <%= f.label :"無効" %>
-  <%= f.submit "変更を保存する", class: "btn btn-primary" %>
-<% end %>
+<!-- 入力フォーム部分テンプレート化 -->
+<%= render 'newform', genre: @genre %>

@@ -1,23 +1,16 @@
-<% if @order.errors.any? %>
-   <div id=“error_explanation”>
-    <h3><%= @order.errors.count %>個のエラーがあります。</h3>
-    <ul>
-     <% @order.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-     <% end %>
-    </ul>
-   </div>
-<% end %>
+<!-- バリデーション チェック -->
+<%= render 'admin/error', error: @order %>
 
 <h2>注文情報入力</h2><br>
   <strong class="strong">支払方法</strong>
-   <%= form_with model: @order, url: confirm_orders_path, local: true do |f| %>
+    
 
-   <div class="row">
+    <div class="row">
     <div class="col-xs-1">
     </div>
     <div class="col-xs-11">
       <div>
+        <%= form_with model: @order, url: confirm_orders_path, local: true do |f| %>
         <%= f.radio_button :payment_method, :'クレジットカード', checked: true %>
         <%= f.label :"クレジットカード" %>
       </div>
@@ -58,15 +51,15 @@
      <div class="margin-left-block">
         <div>
           <span>郵便番号(ハイフンなし)</span>
-          <%= n.text_field :post_code %>
+          <%= n.text_field :post_code, placeholder: "郵便番号" %>
         </div><br>
         <div>
           <span class="second-child">住所</span>
-          <%= n.text_field :address, :size=>"50"%>
+          <%= n.text_field :address, :size=>"50", placeholder: "住所"%>
         </div><br>
         <div>
           <span class="second-child">宛名</span>
-          <%= n.text_field :name %>
+          <%= n.text_field :name, placeholder: "宛名" %>
         </div>
       <% end %>
     </div><br>

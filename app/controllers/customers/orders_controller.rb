@@ -1,7 +1,7 @@
 class Customers::OrdersController < ApplicationController
 
+  before_action :authenticate_customer!
   before_action :redirect_root, only: [:new, :confirm]
-  # before_action :authenticate_customer!
   before_action :set_customer, only: [:new, :confirm, :create, :index]
 
 

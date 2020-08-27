@@ -1,5 +1,6 @@
 class Admin::ProductsController < ApplicationController
-  # before_action :authenticate_admin!
+  before_action :authenticate_admin!
+  before_action :redirect_root, only: [:new, :confirm]
   before_action :product_id, only: [:show, :edit, :update]
   
   def index
@@ -37,6 +38,11 @@ class Admin::ProductsController < ApplicationController
   private
   def product_params
     params.require(:product).permit(:image, :name, :introduction, :genre_id, :price, :is_active)
+  end
+
+  def redirect_root
+    @cart_item = current_customer.cart_items
+    redirect_to root_path unless @cart_item.exists?
   end
 
   def product_id

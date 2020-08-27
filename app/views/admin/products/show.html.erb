@@ -1,14 +1,13 @@
 <!-- サクセスメッセージ -->
 <%= flash[:notice] %>
 <div class="row">
-<h3 class="admin-title">商品詳細</h3><br>
+  <h3 class="admin-title">商品詳細</h3><br>
 </div>
-<!-- 画像詳細画像の大きさは任せます -->
 <div class="row">
-<div class="col-xs-3">
-<%= attachment_image_tag(@product, :image, :fill, 250, 250, class: 'product-image2') %>
-</div>
-<div class="col-xs-6">
+  <div class="col-xs-3">
+      <%= attachment_image_tag(@product, :image, :fill, 250, 250, class: 'product-image2') %>
+  </div>
+  <div class="col-xs-6">
 	<table class="table">
 		<tr>
 			<th class="col-xs-4">商品名</th>
@@ -26,13 +25,14 @@
 			<th>税込価格（税抜価格）</th>
 			<td>
 				<% price = @product.tax_include_price %>
-				<%= price.round %>円 (<%= @product.price %>円)
+				¥<%= price.round.to_s(:delimited) %> (¥<%= @product.price.to_s(:delimited) %>)
 			</td>
 		</tr>
 		<tr>
-			<th>販売ステータス</th>
-			<td><%= @product.is_active ? "販売中" : "売切れ"  %></td>
+	      <th>販売ステータス</th>
+		  <td><%= @product.is_active ? "販売中" : "売切れ"  %></td>
 		</tr>
 	</table>
 	<%= link_to "編集する", edit_admin_product_path(@product), class: "btn btn-primary", :style=>"float:right;"%>
+  </div>
 </div>

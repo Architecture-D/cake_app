@@ -1,0 +1,13 @@
+<%= form_with model:genre, url: admin_genres_path, local:true do |f| %>
+  <%= f.label :"ジャンル" %>
+  <%= f.text_field :name, placeholder: "ジャンル名" %>
+  <%= f.radio_button :is_active, :true, checked:true %>
+  <%= f.label :"有効" %>
+  <%= f.radio_button :is_active, :false, checked:false %>
+  <%= f.label :"無効" %>
+  <% if genre.name.nil? %>
+    <%= f.submit "追加",class: "btn btn-success" %>
+  <% else %>
+    <%= f.submit "変更を保存する", class: "btn btn-primary" %>
+  <% end %>
+<% end %>

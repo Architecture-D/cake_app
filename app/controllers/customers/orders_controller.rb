@@ -1,5 +1,5 @@
 class Customers::OrdersController < ApplicationController
-  # before_action :authenticate_customer!
+  before_action :authenticate_customer!
   before_action :set_customer, only: [:new, :confirm, :create, :index]
 
   def new

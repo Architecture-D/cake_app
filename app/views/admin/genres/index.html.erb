@@ -1,63 +1,38 @@
 <!-- サクセスメッセージ -->
 <%= flash[:notice] %>
 <!-- バリデーション チェック -->
-<% if @genre.errors.any? %>
-      <div id="error_explanation">
-        <h3><%= @genre.errors.count %>個のエラーがあります。</h3>
-        <ul>
-          <% @genre.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-<% end %>
+<%= render 'admin/error', error: @genre %>
 <div class="row">
- <div class="col-xs-6">
-<h3 class="admin-title">ジャンル一覧・追加</h3><br>
-
-<%= form_with model:@genre, url: admin_genres_path, local:true do |f| %>
-  <%= f.label :"ジャンル" %>
-  <%= f.text_field :name %>
-  <%= f.radio_button :is_active, :true, checked:true %>
-  <%= f.label :"有効" %>
-  <%= f.radio_button :is_active, :false, checked:false %>
-  <%= f.label :"無効" %>
-  <%= f.submit "追加",class: "btn btn-success" %>
-<% end %>
- </div>
- <div class="col-xs-6">
- </div>
-
-</div>
-<br>
-
-<div class="row">
- <div class="col-xs-6">
-<table class="table">
-	<thead>
+  <div class="col-xs-6">
+    <h3 class="admin-title">ジャンル一覧・追加</h3><br>
+    <!-- 入力フォーム部分テンプレート化 -->
+    <%= render 'newform', genre: @genre %>
+    <br>
+    <table class="table">
+	  <thead>
 		<tr class="info">
 			<th>ジャンル</th>
 			<th>状態</th>
 			<th></th>
 		</tr>
-	</thead>
-	<tbody>
-	  <% @genres.each do |genre| %>
-		<tr>
-		  <td>
-		  	<%= genre.name %>
-		  </td>
-		  <td>
-		  	<%= genre.is_active ? "有効" : "無効" %>
-		  </td>
-		  <td>
-		  	<%= link_to "編集する", edit_admin_genre_path(genre), class: "btn btn-primary" %>
-		  </td>
-		</tr>
-	  <% end %>
-	</tbody>
-</table>
- </div>
+	  </thead>
+	  <tbody>
+	    <% @genres.each do |genre| %>
+		  <tr>
+		    <td>
+		  	  <%= genre.name %>
+		    </td>
+		    <td>
+		  	  <%= genre.is_active ? "有効" : "無効" %>
+		    </td>
+		    <td>
+		  	  <%= link_to "編集する", edit_admin_genre_path(genre), class: "btn btn-primary" %>
+		    </td>
+		  </tr>
+	    <% end %>
+	  </tbody>
+    </table>
+  </div>
   <div class="col-xs-6">
   </div>
 </div>

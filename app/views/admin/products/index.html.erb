@@ -1,44 +1,42 @@
 <div class="row">
-<div class="col-xs-1">
-</div>
-<div class="col-xs-9">
-<h3 class="admin-title">商品一覧</h3><br>
-</div>
-<div class="col-xs-2"><br>
+  <div class="col-xs-1">
+  </div>
+  <div class="col-xs-9">
+    <h3 class="admin-title">商品一覧</h3><br>
+  </div>
+  <div class="col-xs-2"><br>
 	<%= link_to new_admin_product_path do %>
-	 <h1><i class="fas fa-plus-circle"></i></h1>
+	  <h1><i class="fas fa-plus-circle"></i></h1>
 	<% end %>
-</div>
+  </div>
 </div>
 
 <div class="row">
-<div class="col-xs-1">
-</div>
-
-<div class="col-xs-10">
-<table class="table table-striped">
-	<thead>
-		<tr class="success">
+  <div class="col-xs-1">
+  </div>
+  <div class="col-xs-10">
+    <table class="table table-striped">
+	  <thead>
+		  <tr class="success">
 			<th>商品ID</th>
 			<th>商品名</th>
 			<th>税抜価格</th>
 			<th>ジャンル</th>
 			<th>ステータス</th>
 		</tr>
-	</thead>
-	<tbody>
-	  <% @products.each do |product| %>
-		<tr>
+	  </thead>
+	  <tbody>
+	    <% @products.each do |product| %>
+		  <tr>
 			<td><%= product.id %></td>
 			<td><%= link_to product.name, admin_product_path(product) %></td>
-			<td><%= product.price %></td>
+			<td>¥<%= product.price.to_s(:delimited) %></td>
 			<td><%= product.genre.name %></td>
 			<td><%= product.is_active ? "販売中" : "売切れ"  %></td>
-		</tr>
-	  <% end %>
-	</tbody>
-</table>
-<div class='admin-paginate'><%= paginate @products %></div>
-</div>
-
+		  </tr>
+	    <% end %>
+	  </tbody>
+    </table>
+    <div class='admin-paginate'><%= paginate @products %></div>
+  </div>
 </div>

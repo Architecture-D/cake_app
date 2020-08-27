@@ -1,6 +1,9 @@
 class Customers::OrdersController < ApplicationController
+
+  before_action :redirect_root, only: [:new, :confirm]
   # before_action :authenticate_customer!
   before_action :set_customer, only: [:new, :confirm, :create, :index]
+
 
   def new
     @order = Order.new
@@ -77,6 +80,11 @@ class Customers::OrdersController < ApplicationController
     params.require(:order).permit(
       :created_at, :post_code, :address, :name, :shipping_cost, :total_payment, :payment_method, :status,
       order_products_attributes: [:product_id, :order_id, :purchase_price, :quantity, :make_status ])
+  end
+
+  def redirect_root
+    @cart_item = current_customer.cart_items
+    redirect_to root_path unless @cart_item.exists?
   end
 
   def set_customer

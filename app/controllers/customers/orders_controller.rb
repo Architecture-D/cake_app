@@ -1,14 +1,15 @@
 class Customers::OrdersController < ApplicationController
 
   before_action :redirect_root, only: [:new, :confirm]
+  # before_action :authenticate_customer!
+  before_action :set_customer, only: [:new, :confirm, :create, :index]
+
 
   def new
     @order = Order.new
-    @customer = Customer.find(current_customer.id)
   end
 
   def confirm
-    @customer = Customer.find(current_customer.id)
     @order = Order.new
     @cart_items = current_customer.cart_items
     @order.payment_method = params[:order][:payment_method]
@@ -33,7 +34,6 @@ class Customers::OrdersController < ApplicationController
   end
 
   def create
-    @customer = Customer.find(current_customer.id)
     if current_customer.cart_items.exists?
       @order = Order.new(order_params)
       @order.customer_id = current_customer.id
@@ -57,17 +57,14 @@ class Customers::OrdersController < ApplicationController
       end
       render :thank
     else
-      redirect_to customers_path
-      flash[:danger] = 'カートが空です。'
+      redirect_to customers_path, danger:"カートが空です。"
     end
   end
 
   def thank
-
   end
 
   def index
-    @customer = Customer.find(current_customer.id)
     @orders = @customer.orders.page(params[:page]).reverse_order
   end
 
@@ -75,7 +72,6 @@ class Customers::OrdersController < ApplicationController
     @order = Order.find(params[:id])
     if @order.customer_id != current_customer.id
       redirect_back(fallback_location: root_path)
-      flash[:alert] = "アクセスに失敗しました。"
     end
   end
 
@@ -89,5 +85,8 @@ class Customers::OrdersController < ApplicationController
   def redirect_root
     @cart_item = current_customer.cart_items
     redirect_to root_path unless @cart_item.exists?
+  end
+  def set_customer
+    @customer = Customer.find(current_customer.id)
   end
 end

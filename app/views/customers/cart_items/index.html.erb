@@ -37,7 +37,7 @@
 			</td>
 			<td>
 				<% sum_product = item.product.tax_include_price.to_i * item.quantity %>
-				<%= sum_product.to_s(:delimited) %>
+				¥<%= sum_product.to_s(:delimited) %>
         		<% sum_all += sum_product %>
 			</td>
 			<td>

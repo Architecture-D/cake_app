@@ -13,7 +13,7 @@ before_action :authenticate_customer!
   def update_info
     @customer = current_customer
     if @customer.update(customer_params)
-      redirect_to customers_path, notice: "You have updated successfully."
+      redirect_to customers_path
     else
       @customer = current_customer
       render "edit_info"

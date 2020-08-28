@@ -1,10 +1,16 @@
-<%= form_with model:@product, url: admin_products_path, local:true do |f| %>
+<%= form_with model:product, url: admin_products_path, local:true do |f| %>
  <!--  画像投稿時のプレビュー機能はチャレンジ項目実装は時間があれば -->
-  <%= f.attachment_field :image %><br>
+  
   <div class="row">
 	<div class="col-xs-6">
 	  <table class="table">
 	    <thead>
+	      <tr>
+	      	<th></th>
+	      	<td>
+	      	  <%= f.attachment_field :image %>
+	      	</td>
+	      </tr>
 		  <tr>
 		    <th><%= f.label :"商品名" %></th>
 		    <th><%= f.text_field :name, placeholder: "商品名" %></th>
@@ -20,13 +26,17 @@
 		    </th>
 		  </tr>
 		  <tr>
-		    <th><%= f.label :"税抜価格", placeholder: "価格" %></th>
-		    <th><%= f.text_field :price %>円</th>
+		    <th><%= f.label :"税抜価格" %></th>
+		    <th><%= f.text_field :price, placeholder: "価格" %>円</th>
 		  </tr>
 		  <tr>
 		    <th><%= f.label :"販売ステータス" %></th>
 		    <th>
-		      <%= f.select :is_active ,[['販売中',true],['売切れ',false]], { include_blank: "選択して下さい", selected: 0 } %>
+		      <% if product.name.nil? %>
+		        <%= f.select :is_active ,[['販売中',true],['売切れ',false]], { include_blank: "選択して下さい", selected: 0 } %>
+		      <% else %>
+	            <%= f.select :is_active ,[['販売中',true],['売切れ',false]] %>
+	          <% end %>
 		    </th>
 		  </tr>
 	    </thead>

@@ -1,35 +1,11 @@
 <br>
-
- <div class="row">
-  <div class="col-xs-12">
-
-<table class="table table-bordered">
-  <tr>
-   <th class="col-xs-2"><h4>　<i class="fas fa-search"></i>ジャンル別一覧</h4></th>
-
-   <td class="col-xs-10">
-    　<%= link_to("全商品", products_path, {class: "nav-link"}) %>
-    <% @genres.each do |genre| %>
-    <%= link_to( genre.name, products_path(genre_id: genre.id), {class: "nav-link"}) %>
-    <% end %>
-    <span class="new-genre"><i class="far fa-star"></i>新ジャンル随時追加予定!!</span>
-   </td>
-  </tr>
-</table>
-
-  </div>
- </div>
-
- <div class="row">
-
-</div><br>
-
+<%= render 'genre', genres: @genres %>
+<br>
 <div class="row">
   <div class="col-xs-1">
   </div>
-
   <div class="col-xs-3">
-   <%= attachment_image_tag(@product, :image, :fill, 280, 280, class: 'product-image2') %>
+    <%= attachment_image_tag(@product, :image, :fill, 280, 280, class: 'product-image2') %>
   </div>
   <div class="col-xs-3">
     <h2 class="product-name"><%= @product.name %></h2><br>
@@ -41,17 +17,17 @@
   </div>
   <div class="col-xs-7">
   	<div class="price-margin">
-    <h4>¥ <% (price = @product.price * 1.08 ) %><%= price.round %>(税込)</h4>
-    <% if customer_signed_in? %>
-    <%= form_with(model: [@product, @cart], local: true, url: {controller: 'cart_items', action: 'create'}) do |f| %>
-    <%= f.label :ご購入個数 %>
-    <%= f.number_field :quantity, value: 1 ,min:1, max:99 %>個
-    <%= f.hidden_field :product_id, value: @product.id  %>
-    <%= f.submit "カートに入れる", class: "btn btn-primary" %>
-    <% end %>
-    <% else %>
-    <%= link_to "新規登録して購入する", new_customer_registration_path ,class:"btn btn-success"%>
-    <% end %>
+      <h4>¥ <% (price = @product.price * 1.08 ) %><%= price.round %>(税込)</h4>
+      <% if customer_signed_in? %>
+        <%= form_with(model: [@product, @cart], local: true, url: {controller: 'cart_items', action: 'create'}) do |f| %>
+          <%= f.label :ご購入個数 %>
+          <%= f.number_field :quantity, value: 1 ,min:1, max:99 %>個
+          <%= f.hidden_field :product_id, value: @product.id  %>
+          <%= f.submit "カートに入れる", class: "btn btn-primary" %>
+        <% end %>
+      <% else %>
+        <%= link_to "新規登録して購入する", new_customer_registration_path ,class:"btn btn-success"%>
+      <% end %>
     </div>
   </div>
 </div>

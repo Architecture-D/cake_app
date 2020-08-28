@@ -6,6 +6,14 @@ class Customers::ProductsController < ApplicationController
      #@products = Product.where(genre_id: params[:product][:genre_id],is_active: true)
 
   def index
+    if customer_signed_in?
+      @customer = Customer.find(current_customer.id)
+        if @customer.is_deleted == true
+           reset_session
+           redirect_to new_customer_registration_path
+        end 
+    end
+
     @genres = Genre.where(is_active: true)
     if params[:genre_id].present?
       @products_all = Product.where(genre_id: params[:genre_id],is_active: true)

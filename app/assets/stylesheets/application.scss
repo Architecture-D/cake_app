@@ -30,6 +30,7 @@ font-family: 'M PLUS Rounded 1c', sans-serif;
 html {
     height: 100%;
 }
+
 body {
     padding-top:70px;
     margin: 0;
@@ -247,6 +248,11 @@ height:36px;
 
 .admin-paginate{
 text-align: center;
+}
+
+.field-left{
+	float:left;
+	margin-right: 10px;
 }
 
 

@@ -9,7 +9,9 @@ before_action :authenticate_customer!
       if @already_cart_item.nil?
         @cart_item.save
       else
-        @already_cart_item.increment!(:quantity, params[:cart_item][:quantity].to_i)
+        #@already_cart_item.increment!(:quantity, params[:cart_item][:quantity].to_i)
+        @already_cart_item.quantity += params[:cart_item][:quantity].to_i 
+        @already_cart_item.save 
       end
     end
     redirect_to cart_items_path
@@ -17,6 +19,8 @@ before_action :authenticate_customer!
 
   def index
     @cart_items = current_customer.cart_items
+    @test = @cart_items.pluck(:product_id)
+    @products = Product.joins(:genre).where(is_active: true, genres: { is_active: "true"}).where.not(id: @test)
   end
 
   def destroy_all

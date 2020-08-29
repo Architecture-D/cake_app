@@ -10,7 +10,7 @@
     <% @products.each do |product| %>
       <div class="col-xs-3">
         <%= link_to product_path(product) do %>
-  	      <%= attachment_image_tag product, :image, :fill, 280, 280, class: 'product-image'%>
+  	      <%= attachment_image_tag product, :image, :fill, 330, 330, class: 'product-image'%>
         <% end %>
         <p><%= product.name %><br>
           ¥<%= product.price %></p>

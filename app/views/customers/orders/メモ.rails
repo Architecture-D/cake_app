@@ -3,7 +3,7 @@
 
 <h2>注文情報入力</h2><br>
   <strong class="strong">支払方法</strong>
-
+    
 
     <div class="row">
     <div class="col-xs-1">
@@ -71,9 +71,3 @@
   <%= f.submit "確認画面へ進む",class: "btn btn-primary" %>
 </div>
 <% end %>
-
-
-
-
-
-

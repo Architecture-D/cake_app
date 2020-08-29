@@ -62,13 +62,28 @@
 
 
 <% if @cart_items.exists? %>
-<%= link_to "情報入力に進む", new_order_path, class: "btn btn-success"  %>
+<%= link_to "情報入力に進む", new_order_path, data: {"turbolinks"=>false},class: "btn btn-success"  %>
 <% end %>
 
 
  </div>
  <div class="col-xs-1">
  </div>
+</div>
+
+<div class="row">
+
+	<h4><i class="fas fa-star"></i>ご一緒にいかがですか？</h4>
+	<% @products.shuffle.first(6).each do |product| %>
+      <div class="col-xs-2">
+        <%= link_to product_path(product) do %>
+  	    <%= attachment_image_tag product, :image, :fill, 260, 260, class: 'product-image'%>
+        <% end %>
+        <p><%= product.name %><br>
+       ¥<%= product.price %></p>
+      </div>
+    <% end %>
+
 </div>
 
 

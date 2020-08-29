@@ -4,13 +4,14 @@
 	  <table class="table">
 	    <thead>
 	      <tr>
-	      	<th></th>
-	      	<td>
-	      	  <div class="item-image">
+	      	<th>
 	      	  	<%= attachment_image_tag @product, :image, class:"img-square", fallback: "no_image.jpg", size:"200x160" %>
+	      	</th>
+	      	<th>
+	      	  <div class="item-image">
 	      	    <%= f.attachment_field :image %>
 	      	  </div>
-	      	</td>
+	      	</th>
 	      </tr>
 		  <tr>
 		    <th><%= f.label :"商品名" %></th>

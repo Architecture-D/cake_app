@@ -1,15 +1,17 @@
 <%= form_with model:product, url: admin_products_path, local:true do |f| %>
- <!--  画像投稿時のプレビュー機能はチャレンジ項目実装は時間があれば -->
-  
   <div class="row">
 	<div class="col-xs-6">
 	  <table class="table">
 	    <thead>
 	      <tr>
-	      	<th></th>
-	      	<td>
-	      	  <%= f.attachment_field :image %>
-	      	</td>
+	      	<th>
+	      	  	<%= attachment_image_tag @product, :image, class:"img-square", fallback: "no_image.jpg", size:"200x160" %>
+	      	</th>
+	      	<th>
+	      	  <div class="item-image">
+	      	    <%= f.attachment_field :image %>
+	      	  </div>
+	      	</th>
 	      </tr>
 		  <tr>
 		    <th><%= f.label :"商品名" %></th>
@@ -49,3 +51,18 @@
     </div>
   </div>
 <% end %>
+<script>
+    $(function(){
+    // inputのidから情報の取得
+    $(".item-image").on('change', function (e) {
+    // ここから既存の画像のurlの取得
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $(".image").attr('src', e.target.result);
+    }
+    // ここまで
+    reader.readAsDataURL(e.target.files[0]);
+    //取得したurlにアップロード画像のurlを挿入
+});
+});
+</script>

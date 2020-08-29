@@ -20,17 +20,28 @@
 </span>
 <% end %>
 
-
-<% if customer_signed_in? %>
+<% if admin_signed_in? %>
       <div class='col-xs-offset-5'>
         <nav class='nav navbar-nav navbar-center' >
+        <%= link_to admin_root_path do %>
+        <h4>Nagano Cake</h4>
+        <% end %>
+        </nav>
+      </div>
+<% elsif customer_signed_in? %>
+      <div class='col-xs-offset-5'>
+        <nav class='nav navbar-nav navbar-center' >
+        <%= link_to root_path do %>
         <h4 class="customer-h4">Nagano Cake</h4>
+          <% end %>
         </nav>
       </div>
 <% else %>
       <div class='col-xs-offset-5'>
         <nav class='nav navbar-nav navbar-center' >
+        <%= link_to root_path do %>
         <h4>Nagano Cake</h4>
+        <% end %>
         </nav>
       </div>
 <% end %>

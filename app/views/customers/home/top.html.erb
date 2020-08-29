@@ -16,7 +16,7 @@
       <% @products.shuffle.first(4).each do |product| %>
         <div class=col-xs-3>
           <%= link_to product_path(product) do %>
-            <%= attachment_image_tag product, :image, :fill, 280, 280, class: 'product-image'%>
+            <%= attachment_image_tag product, :image, :fill, 340, 340, class: 'product-image'%>
           <% end %>
           <%= product.name %><br>
           ¥<%= product.price %>

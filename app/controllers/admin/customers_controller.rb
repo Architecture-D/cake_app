@@ -17,7 +17,7 @@ before_action :authenticate_admin!
   def update
   	@customer = Customer.find(params[:id])
   	if @customer.update(customer_params)
-      redirect_to admin_customer_path(@customer.id), notice: "You have updated successfully."
+      redirect_to admin_customer_path(@customer.id)
     else
       @customer = @customer.id
       render "edit"

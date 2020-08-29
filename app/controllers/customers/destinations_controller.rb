@@ -11,7 +11,7 @@ before_action :authenticate_customer!
     @destination = Destination.new(destination_params)
     @destination.customer_id = current_customer.id
     if @destination.save
-      redirect_to destinations_path, notice: "You have created book successfully."
+      redirect_to destinations_path
     else
       @destinations = Destination.all
       render 'index'
@@ -33,7 +33,7 @@ before_action :authenticate_customer!
   def update
     @destination = Destination.find(params[:id])
     if @destination.update(destination_params)
-      redirect_to destinations_path, notice: "You have updated book successfully."
+      redirect_to destinations_path
     else
       render "edit"
     end

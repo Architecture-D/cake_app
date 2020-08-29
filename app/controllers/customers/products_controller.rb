@@ -14,7 +14,7 @@ class Customers::ProductsController < ApplicationController
         if @customer.is_deleted == true
            reset_session
            redirect_to new_customer_registration_path
-        end 
+        end
     end
 
     @genres = Genre.where(is_active: true)

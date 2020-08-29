@@ -249,5 +249,10 @@ height:36px;
 text-align: center;
 }
 
+.img-square {
+    border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
+    width:  180px;       /* ※縦横を同値に */
+    height: 180px;       /* ※縦横を同値に */
+}
 
 

@@ -10,7 +10,7 @@ before_action :authenticate_customer!
         @cart_item.save
       else
         @already_cart_item.increment!(:quantity, params[:cart_item][:quantity].to_i)
-      end
+      endaaaaaaaaaaaaaaaaa
     end
     redirect_to cart_items_path
   end
